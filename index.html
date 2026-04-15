@@ -144,10 +144,9 @@ body {
                 <div class="card-body text-center">
                     <h5>🕋 Umroh & Sejarah</h5>
                     <p>Uji pengetahuan tentang ibadah umroh dan sejarah Islam</p>
-                    <a href="soal1.html" class="btn btn-success btn-custom">
-                    Mulai Test
-                    </a>
-                    
+                    <button class="btn btn-success btn-custom" onclick="mulaiTest('umroh')">
+                        Mulai Test
+                    </button>
                 </div>
             </div>
         </div>
@@ -159,9 +158,9 @@ body {
                 <div class="card-body text-center">
                     <h5>📖 Al-Qur'an & Syariat</h5>
                     <p>Pemahaman tentang Al-Qur'an dan hukum syariat</p>
-                    <a href="soal2.html" class="btn btn-success btn-custom">
-                    Mulai Test
-                    </a>
+                    <button class="btn btn-success btn-custom" onclick="mulaiTest('alquran')">
+                        Mulai Test
+                    </button>
                 </div>
             </div>
         </div>
@@ -190,12 +189,17 @@ body {
 
 <!-- JS -->
 <script>
-function mulaiTest(kategori) {
-    alert("Menuju test kategori: " + kategori);
 
-    // contoh redirect (bisa diganti link GAS / HTML lain)
-    // window.location.href = "test.html?kategori=" + kategori;
+function mulaiTest(kategori) {
+    if (kategori === 'umroh') {
+        window.location.href = "soal1.html";
+    } else if (kategori === 'alquran') {
+        window.location.href = "soal2.html";
+    } else if (kategori === 'akhlak') {
+        window.location.href = "soal3.html";
+    }
 }
+</script>
 </script>
 
 </body>
