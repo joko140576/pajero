@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pajero PT SSI</title>
+
+<!-- BOOTSTRAP -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- ICON -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+
+<style>
+body {
+    background: linear-gradient(to right, #f8fffc, #e6f4ea);
+    font-family: 'Segoe UI', sans-serif;
+}
+
+/* HERO */
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1542816417-0983c9c9ad53?q=80&w=1600');
+    background-size: cover;
+    background-position: center;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.hero h1 {
+    font-weight: bold;
+    font-size: 2.8rem;
+}
+
+/* CARD SYARAT */
+.card-syarat {
+    border: none;
+    border-radius: 20px;
+    transition: 0.3s;
+}
+
+.card-syarat:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.icon-syarat {
+    font-size: 40px;
+    color: #198754;
+}
+
+/* CARD SOAL */
+.card-soal {
+    border-radius: 20px;
+    overflow: hidden;
+    transition: 0.3s;
+}
+
+.card-soal:hover {
+    transform: scale(1.03);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+}
+
+.card-soal img {
+    height: 180px;
+    object-fit: cover;
+}
+
+.btn-custom {
+    border-radius: 30px;
+    padding: 8px 20px;
+}
+
+.section-title {
+    font-weight: bold;
+    margin-bottom: 30px;
+}
+
+/* FOOTER */
+.footer {
+    background: #198754;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>🌙 Pajero PT SSI</h1>
+    <p>Program Perjalanan Rohani untuk Pegawai Terpilih</p>
+</section>
+
+<!-- SECTION 1: SYARAT -->
+<section class="container py-5">
+    <h3 class="text-center section-title">Syarat Mengikuti Pajero</h3>
+
+    <div class="row g-4">
+
+        <!-- SYARAT 1 -->
+        <div class="col-md-4">
+            <div class="card card-syarat text-center p-4">
+                <i class="bi bi-calendar-check icon-syarat"></i>
+                <h5 class="mt-3">Masa Kerja</h5>
+                <p>Minimal masa kerja ≥ 2 tahun</p>
+            </div>
+        </div>
+
+        <!-- SYARAT 2 -->
+        <div class="col-md-4">
+            <div class="card card-syarat text-center p-4">
+                <i class="bi bi-shield-check icon-syarat"></i>
+                <h5 class="mt-3">Disiplin & Perilaku</h5>
+                <p>Tidak pernah terkena SP dalam 1 tahun terakhir</p>
+            </div>
+        </div>
+
+        <!-- SYARAT 3 -->
+        <div class="col-md-4">
+            <div class="card card-syarat text-center p-4">
+                <i class="bi bi-clock-history icon-syarat"></i>
+                <h5 class="mt-3">Absensi HRIS</h5>
+                <p>Disiplin absensi dan kehadiran baik</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- SECTION 2: SOAL -->
+<section class="container py-5">
+    <h3 class="text-center section-title">Pilih Kategori Soal Pajero</h3>
+
+    <div class="row g-4">
+
+        <!-- CARD 1 -->
+        <div class="col-md-4">
+            <div class="card card-soal">
+                <img src="https://images.unsplash.com/photo-1564760055775-d63b17a55c44?q=80&w=1200" class="w-100">
+                <div class="card-body text-center">
+                    <h5>🕋 Umroh & Sejarah</h5>
+                    <p>Uji pengetahuan tentang ibadah umroh dan sejarah Islam</p>
+                    <button class="btn btn-success btn-custom" onclick="mulaiTest('umroh')">
+                        Mulai Test
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 2 -->
+        <div class="col-md-4">
+            <div class="card card-soal">
+                <img src="https://images.unsplash.com/photo-1584551246679-0daf3d275d0f?q=80&w=1200" class="w-100">
+                <div class="card-body text-center">
+                    <h5>📖 Al-Qur'an & Syariat</h5>
+                    <p>Pemahaman tentang Al-Qur'an dan hukum syariat</p>
+                    <button class="btn btn-success btn-custom" onclick="mulaiTest('alquran')">
+                        Mulai Test
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CARD 3 -->
+        <div class="col-md-4">
+            <div class="card card-soal">
+                <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1200" class="w-100">
+                <div class="card-body text-center">
+                    <h5>🕌 Akhlak & Keimanan</h5>
+                    <p>Nilai akhlak, iman, dan kehidupan sehari-hari</p>
+                    <button class="btn btn-success btn-custom" onclick="mulaiTest('akhlak')">
+                        Mulai Test
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- FOOTER -->
+<div class="footer">
+    © 2026 PT SSI - Program Pajero
+</div>
+
+<!-- JS -->
+<script>
+function mulaiTest(kategori) {
+    alert("Menuju test kategori: " + kategori);
+
+    // contoh redirect (bisa diganti link GAS / HTML lain)
+    // window.location.href = "test.html?kategori=" + kategori;
+}
+</script>
+
+</body>
+</html>
