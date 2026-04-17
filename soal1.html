@@ -51,6 +51,31 @@ body {
     font-weight:bold;
     font-size:18px;
 }
+.header-hero {
+    background: url('https://bucket-api.baznas.go.id/bucket-api/file?bucket=bzn-fdr-smb-p5739641&file=attachments/new_artikel/NTY2MDE3MTc2NDg0MDM.jpg') no-repeat center center; 
+    background-size: cover;
+    
+    padding: 60px 20px;
+    border-radius: 16px;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+/* overlay biar tulisan tetap kebaca */
+.header-hero::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+}
+
+/* supaya text di atas overlay */
+.header-hero .content {
+    position: relative;
+    z-index: 2;
+}
+    
 </style>
 </head>
 
@@ -66,15 +91,17 @@ body {
 
 <div class="container mainbox py-5">
 
-    <div class="text-center mb-4">
-        <h3 class="fw-bold text-dark">
-            <i class="bi bi-airplane-fill me-2"></i>
-            PAJERO 2026
-        </h3>
-        <h5 class="text-muted">
-            SOAL SEPUTAR UMROH 
-        </h5>
-    </div>
+    <div class="header-hero mb-4">
+        <div class="content text-center">
+            <h3 class="fw-bold">
+                <i class="bi bi-airplane-fill me-2"></i>
+                PAJERO 2026
+            </h3>
+            <h5>
+                SOAL SEPUTAR UMROH 
+            </h5>
+        </div>
+   </div>
 
     <!-- FORM -->
     <div id="formPeserta" class="card shadow-lg">
