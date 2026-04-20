@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<title>Pelatihan PT SSI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold: #c9a84c;
+  --gold-light: #e8d08a;
+  --gold-dark: #8a6a1e;
+  --gold-pale: #fdf8ec;
+  --ink: #1a1208;
+  --ink2: #3d2e10;
+  --cream: #faf6ed;
+  --cream2: #f3ead6;
+  --accent: #7b5e1a;
+  --white: #ffffff;
+  --shadow: 0 8px 48px rgba(100,70,10,0.13);
+  --shadow-sm: 0 2px 12px rgba(100,70,10,0.08);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  color: var(--ink);
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Geometric background pattern */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 20% 20%, rgba(201,168,76,0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(201,168,76,0.06) 0%, transparent 50%),
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M30 0l30 30-30 30L0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+.mainbox {
+  max-width: 680px;
+  margin: auto;
+  padding: 40px 20px 60px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ─── HERO ─── */
+.header-hero {
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 32px;
+  box-shadow: var(--shadow);
+  animation: fadeDown 0.7s ease both;
+}
+
+.header-hero::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(160deg, rgba(15,10,2,0.72) 0%, rgba(60,40,5,0.85) 100%);
+}
+
+.header-hero img.bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 52px 36px 44px;
+  text-align: center;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(201,168,76,0.18);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  margin-bottom: 20px;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.1;
+  margin-bottom: 10px;
+  letter-spacing: -0.5px;
+}
+
+.hero-title span {
+  color: var(--gold-light);
+}
+
+.hero-subtitle {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255,255,255,0.65);
+  letter-spacing: 3px;
+  text-transform: uppercase;
+}
+
+/* Golden divider */
+.gold-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 24px auto 0;
+  width: 200px;
+}
+.gold-divider::before,
+.gold-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, rgba(201,168,76,0.6));
+}
+.gold-divider::after {
+  background: linear-gradient(to left, transparent, rgba(201,168,76,0.6));
+}
+.gold-diamond {
+  width: 6px;
+  height: 6px;
+  background: var(--gold);
+  transform: rotate(45deg);
+  flex-shrink: 0;
+}
+
+/* ─── CARD ─── */
+.card-panel {
+  background: var(--white);
+  border-radius: 20px;
+  border: 1px solid rgba(201,168,76,0.18);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  animation: fadeUp 0.6s ease 0.15s both;
+}
+
+.card-head {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink2) 100%);
+  padding: 18px 28px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid var(--gold);
+}
+.card-head-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  background: rgba(201,168,76,0.18);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-size: 15px;
+}
+.card-head-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--white);
+  letter-spacing: 0.3px;
+}
+.card-head-sub {
+  font-size: 11px;
+  color: rgba(255,255,255,0.45);
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+.card-body-inner {
+  padding: 28px;
+}
+
+/* ─── FORM FIELDS ─── */
+.field-group {
+  margin-bottom: 22px;
+}
+
+.field-label {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+
+.field-label i {
+  font-size: 13px;
+  color: var(--gold);
+}
+
+.form-control, .form-select {
+  background: var(--gold-pale) !important;
+  border: 1.5px solid rgba(201,168,76,0.25) !important;
+  border-radius: 12px !important;
+  padding: 12px 16px !important;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px !important;
+  color: var(--ink) !important;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus, .form-select:focus {
+  outline: none !important;
+  border-color: var(--gold) !important;
+  box-shadow: 0 0 0 3px rgba(201,168,76,0.12) !important;
+  background: #fff !important;
+}
+.form-control::placeholder { color: #b8a882; }
+
+/* ─── SUBMIT BUTTON ─── */
+.btn-submit {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--gold-dark) 0%, var(--gold) 50%, var(--gold-dark) 100%);
+  background-size: 200% 100%;
+  background-position: right;
+  border: none;
+  border-radius: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: #fff;
+  cursor: pointer;
+  transition: background-position 0.4s, transform 0.15s, box-shadow 0.2s;
+  box-shadow: 0 4px 20px rgba(140,100,20,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+.btn-submit:hover {
+  background-position: left;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 28px rgba(140,100,20,0.45);
+}
+.btn-submit:active { transform: scale(0.98); }
+
+/* ─── TIMER ─── */
+#timerBox {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  padding: 14px 24px;
+  background: linear-gradient(90deg, var(--ink) 0%, #2a1a04 100%);
+  border-bottom: 2px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+}
+
+.timer-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+#timer {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--gold-light);
+  letter-spacing: 2px;
+  min-width: 80px;
+  text-align: center;
+}
+
+.timer-pulse {
+  width: 8px;
+  height: 8px;
+  background: var(--gold);
+  border-radius: 50%;
+  animation: pulse 1s infinite;
+}
+
+/* ─── SOAL BOX ─── */
+.soal-box {
+  background: var(--gold-pale);
+  border: 1px solid rgba(201,168,76,0.22);
+  border-radius: 16px;
+  padding: 22px 22px 18px;
+  margin-bottom: 16px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+  animation: fadeUp 0.4s ease both;
+}
+.soal-box:hover {
+  border-color: rgba(201,168,76,0.5);
+  box-shadow: 0 4px 20px rgba(140,100,20,0.1);
+}
+
+.soal-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: var(--gold);
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.soal-text {
+  font-size: 14.5px;
+  font-weight: 500;
+  color: var(--ink);
+  line-height: 1.6;
+  display: flex;
+  align-items: flex-start;
+  gap: 2px;
+  margin-bottom: 16px;
+}
+
+.option-label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  font-size: 13.5px;
+  color: var(--ink2);
+  transition: background 0.15s, border-color 0.15s;
+  margin-bottom: 6px;
+}
+.option-label:hover {
+  background: rgba(201,168,76,0.1);
+  border-color: rgba(201,168,76,0.35);
+}
+.option-label input[type="radio"] {
+  accent-color: var(--gold);
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.option-key {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: rgba(201,168,76,0.15);
+  color: var(--gold-dark);
+  font-size: 11px;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+
+/* ─── HASIL ─── */
+#hasilBox {
+  background: var(--white);
+  border-radius: 24px;
+  border: 1px solid rgba(201,168,76,0.2);
+  box-shadow: var(--shadow);
+  padding: 52px 32px;
+  text-align: center;
+}
+
+.hasil-ornament {
+  font-size: 48px;
+  margin-bottom: 16px;
+  filter: drop-shadow(0 4px 12px rgba(201,168,76,0.3));
+}
+
+.hasil-nilai {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 5rem;
+  font-weight: 700;
+  color: var(--gold);
+  line-height: 1;
+  margin: 8px 0;
+}
+
+.hasil-label {
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+}
+
+.hasil-thanks {
+  font-size: 15px;
+  color: #888;
+}
+
+.timeout-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  border-radius: 100px;
+  padding: 6px 18px;
+  font-size: 12px;
+  color: #dc2626;
+  font-weight: 600;
+  margin-bottom: 20px;
+}
+
+/* ─── MODAL ─── */
+.modal-content {
+  border-radius: 20px !important;
+  border: 1px solid rgba(201,168,76,0.25) !important;
+  overflow: hidden;
+  box-shadow: 0 24px 80px rgba(0,0,0,0.2) !important;
+}
+
+.modal-header-custom {
+  background: linear-gradient(135deg, var(--ink) 0%, var(--ink2) 100%);
+  border-bottom: 2px solid var(--gold);
+  padding: 20px 24px;
+}
+
+.modal-title-custom {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--white);
+}
+
+.modal-body { padding: 28px 24px; background: var(--white); }
+
+.modal-footer {
+  padding: 16px 24px 24px;
+  border-top: none;
+  background: var(--white);
+}
+
+.btn-login {
+  width: 100%;
+  padding: 13px;
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold));
+  border: none;
+  border-radius: 12px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #fff;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.15s;
+  box-shadow: 0 4px 16px rgba(140,100,20,0.3);
+}
+.btn-login:hover { opacity: 0.9; transform: translateY(-1px); }
+.btn-login:active { transform: scale(0.98); }
+
+/* ─── LOADING ─── */
+#loadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(250,246,237,0.92);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+
+.loading-inner {
+  text-align: center;
+}
+
+.loading-ring {
+  width: 52px;
+  height: 52px;
+  border: 3px solid rgba(201,168,76,0.2);
+  border-top-color: var(--gold);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 0 auto 16px;
+}
+
+.loading-text {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ─── KUMPUL BUTTON ─── */
+.btn-kumpul {
+  width: 100%;
+  padding: 16px;
+  background: linear-gradient(135deg, #1a1208 0%, #3d2e10 100%);
+  border: 2px solid var(--gold);
+  border-radius: 14px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--gold-light);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+}
+.btn-kumpul:hover {
+  background: linear-gradient(135deg, #2a1e08, #5a4218);
+  box-shadow: 0 6px 28px rgba(0,0,0,0.25);
+  transform: translateY(-1px);
+}
+
+/* ─── SECTION LABEL ─── */
+.section-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 16px;
+  background: rgba(201,168,76,0.08);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 12px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: var(--accent);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.7); }
+}
+@keyframes timerFlash {
+  0%, 100% { color: var(--gold-light); }
+  50% { color: #ff6b6b; }
+}
+
+.timer-warning #timer { animation: timerFlash 0.7s infinite; }
+
+.hidden { display: none; }
+
+/* Delay stagger for soal boxes */
+.soal-box:nth-child(1)  { animation-delay: 0.05s; }
+.soal-box:nth-child(2)  { animation-delay: 0.1s; }
+.soal-box:nth-child(3)  { animation-delay: 0.15s; }
+.soal-box:nth-child(4)  { animation-delay: 0.2s; }
+.soal-box:nth-child(5)  { animation-delay: 0.25s; }
+.soal-box:nth-child(6)  { animation-delay: 0.3s; }
+.soal-box:nth-child(7)  { animation-delay: 0.35s; }
+.soal-box:nth-child(8)  { animation-delay: 0.4s; }
+.soal-box:nth-child(9)  { animation-delay: 0.45s; }
+.soal-box:nth-child(10) { animation-delay: 0.5s; }
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loadingOverlay">
+  <div class="loading-inner">
+    <div class="loading-ring"></div>
+    <p class="loading-text">Menyiapkan soal...</p>
+  </div>
+</div>
+
+<div class="container mainbox">
+
+  <!-- HERO -->
+  <div class="header-hero">
+    <img class="bg-img" src="https://bucket-api.baznas.go.id/bucket-api/file?bucket=bzn-fdr-smb-p5739641&file=attachments/new_artikel/NTY2MDE3MTc2NDg0MDM.jpg" alt="hero">
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="bi bi-airplane-fill" style="font-size:11px;"></i>
+        PT SSI · 2026
+      </div>
+      <h1 class="hero-title">PAJERO <span>2026</span></h1>
+      <p class="hero-subtitle">Soal Seputar Umroh</p>
+      <div class="gold-divider"><div class="gold-diamond"></div></div>
+    </div>
+  </div>
+
+  <!-- FORM PESERTA -->
+  <div id="formPeserta" class="card-panel">
+    <div class="card-head">
+      <div class="card-head-icon"><i class="bi bi-person-vcard-fill"></i></div>
+      <div>
+        <div class="card-head-title">Data Peserta</div>
+        <div class="card-head-sub">Isi data dengan benar</div>
+      </div>
+    </div>
+    <div class="card-body-inner">
+
+      <div class="field-group">
+        <label class="field-label"><i class="bi bi-person-fill"></i> Nama Pegawai</label>
+        <input id="nama" class="form-control" placeholder="Masukkan nama lengkap">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label"><i class="bi bi-credit-card-2-front-fill"></i> NPP</label>
+        <input id="npp" class="form-control" placeholder="Nomor Pokok Pegawai">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label"><i class="bi bi-geo-alt-fill"></i> Region</label>
+        <select id="region" class="form-select">
+          <option value="">— Pilih Region —</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label"><i class="bi bi-building-fill"></i> Unit</label>
+        <input id="unit" class="form-control" placeholder="Contoh: TWU Bekasi">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label"><i class="bi bi-briefcase-fill"></i> Jabatan</label>
+        <select id="jabatan" class="form-select">
+          <option value="">— Pilih Jabatan —</option>
+          <option>GM</option>
+          <option>Ceo Region</option>
+          <option>Deputy</option>
+          <option>Senior Manager</option>
+          <option>Manager</option>
+          <option>Asisten Manager</option>
+          <option>Staf</option>
+        </select>
+      </div>
+
+      <button class="btn-submit" onclick="mulaiPostTest()">
+        <i class="bi bi-pencil-square"></i>
+        Mulai Post Test
+      </button>
+
+    </div>
+  </div>
+
+  <!-- TIMER -->
+  <div id="timerBox" class="hidden">
+    <span class="timer-label">Sisa Waktu</span>
+    <span id="timer">30:00</span>
+    <div class="timer-pulse"></div>
+  </div>
+
+  <!-- KUIS -->
+  <div id="kuisBox" class="hidden mt-4">
+    <div class="card-panel">
+      <div class="card-head">
+        <div class="card-head-icon"><i class="bi bi-journal-text"></i></div>
+        <div>
+          <div class="card-head-title">Post Test</div>
+          <div class="card-head-sub">Pilih jawaban yang paling tepat</div>
+        </div>
+      </div>
+      <div class="card-body-inner">
+        <div class="section-info">
+          <i class="bi bi-info-circle-fill" style="color:var(--gold); font-size:14px;"></i>
+          Jawab semua pertanyaan sebelum waktu habis
+        </div>
+        <div id="listSoal"></div>
+        <button class="btn-kumpul" onclick="kumpulkan()">
+          <i class="bi bi-send-fill"></i>
+          Kumpulkan Jawaban
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HASIL -->
+  <div id="hasilBox" class="hidden mt-4">
+    <div id="tampilNilai"></div>
+  </div>
+
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header-custom">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <i class="bi bi-shield-lock-fill" style="color:var(--gold);font-size:18px;"></i>
+          <span class="modal-title-custom">Verifikasi Akses</span>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="field-group">
+          <label class="field-label"><i class="bi bi-person-fill"></i> Username</label>
+          <input id="userLogin" class="form-control" placeholder="Username">
+        </div>
+        <div class="field-group" style="margin-bottom:0;">
+          <label class="field-label"><i class="bi bi-key-fill"></i> Password</label>
+          <input id="passLogin" type="password" class="form-control" placeholder="Password">
+        </div>
+        <div id="loginError" class="hidden" style="margin-top:12px;padding:10px 14px;background:#fef2f2;border:1px solid #fecaca;border-radius:10px;font-size:13px;color:#dc2626;display:flex;align-items:center;gap:8px;">
+          <i class="bi bi-exclamation-circle-fill"></i> Username atau password salah
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn-login" onclick="cekLogin()">
+          <i class="bi bi-box-arrow-in-right" style="margin-right:6px;"></i>
+          Masuk & Mulai Test
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const WEBAPP = "https://script.google.com/macros/s/AKfycbyGVJ5raJd8JjaAZ5_SNjjR5Au6vZ43Wa9xHON-i7u9GqnoyewpnzE0n5zpXN3Kv9ta/exec";
+
+const formPeserta = document.getElementById("formPeserta");
+const kuisBox = document.getElementById("kuisBox");
+const hasilBox = document.getElementById("hasilBox");
+const tampilNilai = document.getElementById("tampilNilai");
+const listSoal = document.getElementById("listSoal");
+const loadingOverlay = document.getElementById("loadingOverlay");
+
+let DATA_SOAL = [];
+let USER = {};
+let waktu = 1800;
+let interval;
+
+function mulaiPostTest(){
+    USER.nama = nama.value;
+    USER.npp = npp.value;
+    USER.region = region.value;
+    USER.unit = unit.value;
+    USER.jabatan = jabatan.value;
+
+    if(!USER.nama || !USER.npp){
+        alert("Nama & NPP wajib diisi");
+        return;
+    }
+
+    new bootstrap.Modal(document.getElementById('loginModal')).show();
+}
+
+function cekLogin(){
+    if(userLogin.value==="pajero1" && passLogin.value==="umroh"){
+        bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+        mulaiSoal();
+    } else {
+        loginError.classList.remove("hidden");
+        loginError.style.display = "flex";
+    }
+}
+
+async function mulaiSoal(){
+    fetch(WEBAPP+"?action=simpandata",{method:"POST",body:JSON.stringify(USER)});
+
+    formPeserta.classList.add("hidden");
+    loadingOverlay.style.display="flex";
+
+    const res = await fetch(WEBAPP+"?action=getsoal");
+    DATA_SOAL = await res.json();
+
+    let html="";
+    DATA_SOAL.forEach((s,i)=>{
+        html+=`
+        <div class="soal-box">
+            <div class="soal-text">
+                <span class="soal-number">${i+1}</span>
+                <span>${s.soal}</span>
+            </div>
+            ${["A","B","C","D"].map(p=>`
+                <label class="option-label">
+                    <input type="radio" name="soal${i}" value="${p}">
+                    <span class="option-key">${p}</span>
+                    <span>${s["opsi"+p]}</span>
+                </label>
+            `).join("")}
+        </div>`;
+    });
+
+    listSoal.innerHTML = html;
+    loadingOverlay.style.display="none";
+    kuisBox.classList.remove("hidden");
+
+    startTimer();
+}
+
+function startTimer(){
+    document.getElementById("timerBox").classList.remove("hidden");
+
+    interval = setInterval(()=>{
+        waktu--;
+
+        let m = Math.floor(waktu/60);
+        let d = waktu%60;
+
+        timer.innerText = String(m).padStart(2,'0') + ":" + String(d).padStart(2,'0');
+
+        if(waktu <= 300){
+            document.getElementById("timerBox").classList.add("timer-warning");
+        }
+
+        if(waktu<=0){
+            clearInterval(interval);
+            waktuHabis();
+        }
+    },1000);
+}
+
+function waktuHabis(){
+    hitungNilai(true);
+}
+
+function kumpulkan(){
+    clearInterval(interval);
+    hitungNilai(false);
+}
+
+function hitungNilai(isTimeout){
+    let benar=0;
+
+    DATA_SOAL.forEach((s,i)=>{
+        const j=document.querySelector(`input[name=soal${i}]:checked`);
+        if(j && j.value===s.kunci) benar++;
+    });
+
+    USER.nilai = Math.round((benar/DATA_SOAL.length)*100);
+
+    fetch(WEBAPP+"?action=simpannilai",{method:"POST",body:JSON.stringify(USER)});
+
+    kuisBox.classList.add("hidden");
+    document.getElementById("timerBox").classList.add("hidden");
+    hasilBox.classList.remove("hidden");
+
+    const emoji = USER.nilai >= 80 ? "🌟" : USER.nilai >= 60 ? "✅" : "📋";
+
+    tampilNilai.innerHTML = `
+        ${isTimeout ? `<div class="timeout-badge"><i class="bi bi-hourglass-bottom"></i> Waktu Habis</div>` : ""}
+        <div class="hasil-ornament">${emoji}</div>
+        <div class="hasil-label">Nilai Anda</div>
+        <div class="hasil-nilai">${USER.nilai}</div>
+        <div style="width:60px;height:2px;background:var(--gold);margin:16px auto 20px;border-radius:2px;"></div>
+        <div class="hasil-thanks">Terima kasih atas partisipasi Anda,<br><strong>${USER.nama}</strong></div>
+    `;
+}
+
+let curangCount = 0;
+
+document.addEventListener("visibilitychange", function () {
+    if (document.hidden && kuisBox.classList.contains("hidden") === false) {
+        curangCount++;
+        fetch(WEBAPP + "?action=curang", {
+            method: "POST",
+            body: JSON.stringify(USER)
+        });
+        alert("⚠️ Dilarang pindah tab! Aktivitas Anda tercatat.");
+    }
+});
+</script>
+
+</body>
+</html>
