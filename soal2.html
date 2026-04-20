@@ -1,0 +1,839 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<title>PAJERO 2026 — Soal Seputar Al-Qur'an</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --g1: #0a4a2e;
+  --g2: #0f6b42;
+  --g3: #1a8a55;
+  --g4: #22a86b;
+  --g5: #2ec47e;
+  --gold: #c9a84c;
+  --gold2: #e8c96a;
+  --cream: #fdf8ee;
+  --cream2: #f7f0dc;
+  --text-dark: #0d2e1c;
+  --text-mid: #1a5235;
+  --shadow: 0 8px 40px rgba(10,74,46,0.18);
+  --shadow-sm: 0 2px 16px rgba(10,74,46,0.10);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  background: var(--cream);
+  font-family: 'Tajawal', 'Segoe UI', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Geometric Islamic pattern background */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: 
+    radial-gradient(circle at 20% 20%, rgba(34,168,107,0.07) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(201,168,76,0.07) 0%, transparent 50%),
+    radial-gradient(circle at 50% 50%, rgba(10,74,46,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* SVG Pattern overlay */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%230f6b42' fill-opacity='0.04'%3E%3Cpath d='M40 0L50 10L40 20L30 10Z'/%3E%3Cpath d='M0 40L10 30L20 40L10 50Z'/%3E%3Cpath d='M60 40L70 30L80 40L70 50Z'/%3E%3Cpath d='M40 60L50 70L40 80L30 70Z'/%3E%3Cpath d='M40 20L60 40L40 60L20 40Z' stroke='%230f6b42' stroke-width='0.5' fill='none' opacity='0.3'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.5;
+}
+
+.mainbox {
+  max-width: 760px;
+  margin: auto;
+  position: relative;
+  z-index: 1;
+  padding: 0 16px;
+}
+
+/* ===== HEADER ===== */
+.header-hero {
+  background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 40%, var(--g3) 100%);
+  border-radius: 24px;
+  padding: 48px 32px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 28px;
+  animation: fadeSlideDown 0.7s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.header-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.06' stroke-width='1'%3E%3Cpolygon points='60,5 115,32 115,88 60,115 5,88 5,32'/%3E%3Cpolygon points='60,20 100,42 100,78 60,100 20,78 20,42'/%3E%3Cpolygon points='60,35 85,52 85,68 60,85 35,68 35,52'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 120px 120px;
+  pointer-events: none;
+}
+
+.header-hero::after {
+  content: "";
+  position: absolute;
+  bottom: -30px; left: -30px;
+  width: 160px; height: 160px;
+  border-radius: 50%;
+  background: rgba(201,168,76,0.12);
+  pointer-events: none;
+}
+
+.bismillah {
+  font-family: 'Amiri', serif;
+  font-size: 28px;
+  color: var(--gold2);
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  display: block;
+  animation: glowPulse 3s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { text-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 20px rgba(232,201,106,0.2); }
+  50% { text-shadow: 0 2px 8px rgba(0,0,0,0.3), 0 0 30px rgba(232,201,106,0.5); }
+}
+
+.header-title {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 30px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+  letter-spacing: 3px;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  position: relative;
+}
+
+.header-subtitle {
+  font-size: 15px;
+  color: rgba(255,255,255,0.85);
+  font-weight: 300;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.gold-divider {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  margin: 18px 0;
+  position: relative;
+}
+.gold-divider::before, .gold-divider::after {
+  content: "";
+  height: 1px;
+  width: 60px;
+  background: linear-gradient(to right, transparent, var(--gold2));
+}
+.gold-divider::after {
+  background: linear-gradient(to left, transparent, var(--gold2));
+}
+.gold-star { color: var(--gold2); font-size: 16px; }
+
+/* ===== CARD ===== */
+.islamic-card {
+  background: #fff;
+  border-radius: 20px;
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  border: 1px solid rgba(201,168,76,0.15);
+  animation: fadeSlideUp 0.6s cubic-bezier(0.22,1,0.36,1) both;
+}
+
+.card-head {
+  background: linear-gradient(135deg, var(--g1), var(--g2));
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+.card-head::after {
+  content: "";
+  position: absolute;
+  right: -20px; top: -20px;
+  width: 80px; height: 80px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.06);
+}
+
+.card-head-icon {
+  width: 38px; height: 38px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: var(--gold2);
+}
+
+.card-head-title {
+  font-size: 16px; font-weight: 700;
+  color: #fff; letter-spacing: 0.5px;
+  font-family: 'Tajawal', sans-serif;
+}
+.card-head-sub {
+  font-size: 12px; color: rgba(255,255,255,0.7);
+  font-weight: 300;
+}
+
+.card-body-inner { padding: 28px 28px 32px; }
+
+/* ===== FORM FIELDS ===== */
+.field-group { margin-bottom: 20px; }
+
+.field-label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--g1);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.field-label i {
+  color: var(--g3);
+  font-size: 15px;
+}
+
+.field-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 1.5px solid rgba(15,107,66,0.2);
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text-dark);
+  background: var(--cream);
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s, background 0.25s;
+  appearance: none;
+}
+.field-input:focus {
+  border-color: var(--g3);
+  background: #fff;
+  box-shadow: 0 0 0 4px rgba(34,168,107,0.12);
+}
+.field-input::placeholder { color: rgba(26,82,53,0.35); }
+
+/* ===== SUBMIT BUTTON ===== */
+.btn-islamic {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--g1) 0%, var(--g3) 100%);
+  color: #fff;
+  border: none;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: 'Tajawal', sans-serif;
+  letter-spacing: 1px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 6px 24px rgba(15,107,66,0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 8px;
+}
+.btn-islamic:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 32px rgba(15,107,66,0.5);
+}
+.btn-islamic:active { transform: translateY(0); }
+.btn-islamic::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.08));
+}
+
+/* ===== TIMER ===== */
+#timerBox {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background: linear-gradient(135deg, var(--g1), var(--g2));
+  border-bottom: 2px solid var(--gold);
+  padding: 12px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: 'Tajawal', sans-serif;
+  animation: slideDown 0.4s ease both;
+}
+#timerBox.hidden { display: none !important; }
+
+.timer-label {
+  color: rgba(255,255,255,0.8);
+  font-size: 13px;
+  font-weight: 300;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.timer-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--gold2);
+  letter-spacing: 3px;
+  font-family: 'Amiri', serif;
+  transition: color 0.3s;
+}
+.timer-urgent { color: #ff6b6b !important; animation: timerPulse 0.7s ease infinite; }
+@keyframes timerPulse { 0%,100% { opacity:1; } 50% { opacity: 0.6; } }
+
+.timer-icon { color: var(--gold2); font-size: 18px; }
+
+/* ===== SOAL BOX ===== */
+.soal-box {
+  background: #fff;
+  border: 1.5px solid rgba(15,107,66,0.12);
+  border-radius: 16px;
+  padding: 22px 24px;
+  margin-bottom: 16px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  animation: fadeSlideUp 0.5s ease both;
+  position: relative;
+  overflow: hidden;
+}
+.soal-box::before {
+  content: "";
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+  background: linear-gradient(to bottom, var(--g3), var(--gold));
+  border-radius: 4px 0 0 4px;
+}
+.soal-box:hover {
+  border-color: rgba(15,107,66,0.3);
+  box-shadow: 0 4px 20px rgba(15,107,66,0.1);
+}
+
+.soal-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px; height: 28px;
+  background: linear-gradient(135deg, var(--g2), var(--g4));
+  color: #fff;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  margin-right: 2px;
+}
+
+.soal-text {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+
+.option-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background 0.2s;
+  color: var(--text-mid);
+  font-size: 14.5px;
+  margin-bottom: 6px;
+}
+.option-label:hover { background: var(--cream2); }
+.option-label input[type=radio] { display: none; }
+.option-label:has(input:checked) {
+  background: rgba(34,168,107,0.1);
+  color: var(--g1);
+  font-weight: 600;
+}
+
+.option-badge {
+  flex-shrink: 0;
+  width: 26px; height: 26px;
+  border-radius: 8px;
+  border: 1.5px solid rgba(15,107,66,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700;
+  color: var(--g2);
+  transition: all 0.2s;
+  margin-top: 1px;
+}
+.option-label:has(input:checked) .option-badge {
+  background: var(--g3);
+  border-color: var(--g3);
+  color: #fff;
+}
+
+/* ===== HASIL ===== */
+.hasil-card {
+  background: linear-gradient(135deg, var(--g1) 0%, var(--g2) 60%, var(--g3) 100%);
+  border-radius: 24px;
+  padding: 48px 32px;
+  text-align: center;
+  color: #fff;
+  position: relative;
+  overflow: hidden;
+  animation: popIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+.hasil-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' stroke='%23ffffff' stroke-opacity='0.05' stroke-width='1'%3E%3Cpolygon points='40,5 75,25 75,55 40,75 5,55 5,25'/%3E%3C/g%3E%3C/svg%3E");
+  background-size: 80px;
+  pointer-events: none;
+}
+
+.nilai-circle {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.1);
+  border: 3px solid var(--gold2);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 20px;
+  box-shadow: 0 0 40px rgba(232,201,106,0.3);
+  animation: popIn 0.8s cubic-bezier(0.34,1.56,0.64,1) 0.2s both;
+}
+.nilai-num {
+  font-size: 38px;
+  font-weight: 700;
+  font-family: 'Amiri', serif;
+  color: var(--gold2);
+  line-height: 1;
+}
+.nilai-label { font-size: 11px; color: rgba(255,255,255,0.7); letter-spacing: 1px; }
+.hasil-title { font-size: 22px; font-weight: 700; margin-bottom: 8px; font-family: 'Tajawal', sans-serif; }
+.hasil-sub { font-size: 15px; color: rgba(255,255,255,0.8); font-weight: 300; }
+.hasbunallah {
+  font-family: 'Amiri', serif;
+  font-size: 20px;
+  color: var(--gold2);
+  margin-top: 20px;
+  display: block;
+}
+
+/* ===== LOADING ===== */
+#loadingOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(247,240,220,0.92);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  backdrop-filter: blur(4px);
+}
+.loading-inner { text-align: center; }
+.loading-ring {
+  width: 60px; height: 60px;
+  border-radius: 50%;
+  border: 3px solid rgba(15,107,66,0.15);
+  border-top-color: var(--g3);
+  border-right-color: var(--gold);
+  animation: spin 0.9s linear infinite;
+  margin: 0 auto 18px;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+.loading-text {
+  font-family: 'Tajawal', sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--g1);
+}
+.loading-sub {
+  font-family: 'Amiri', serif;
+  font-size: 13px;
+  color: var(--g3);
+  margin-top: 4px;
+}
+
+/* ===== MODAL ===== */
+.modal-content {
+  border-radius: 20px !important;
+  border: none !important;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(10,74,46,0.3);
+}
+.modal-header-islamic {
+  background: linear-gradient(135deg, var(--g1), var(--g2));
+  padding: 20px 24px;
+  border: none;
+}
+.modal-body-islamic { padding: 28px 24px; background: var(--cream); }
+.modal-footer-islamic { padding: 16px 24px; background: var(--cream); border-top: 1px solid rgba(15,107,66,0.1); }
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeSlideUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+  from { transform: translateY(-100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes popIn {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hidden { display: none !important; }
+
+/* Staggered soal animation */
+.soal-box:nth-child(1) { animation-delay: 0.05s; }
+.soal-box:nth-child(2) { animation-delay: 0.10s; }
+.soal-box:nth-child(3) { animation-delay: 0.15s; }
+.soal-box:nth-child(4) { animation-delay: 0.20s; }
+.soal-box:nth-child(5) { animation-delay: 0.25s; }
+.soal-box:nth-child(6) { animation-delay: 0.30s; }
+.soal-box:nth-child(7) { animation-delay: 0.35s; }
+.soal-box:nth-child(8) { animation-delay: 0.40s; }
+.soal-box:nth-child(9) { animation-delay: 0.45s; }
+.soal-box:nth-child(10) { animation-delay: 0.50s; }
+
+/* Warning banner */
+.warning-strip {
+  background: linear-gradient(90deg, rgba(220,53,69,0.08), rgba(220,53,69,0.12), rgba(220,53,69,0.08));
+  border: 1px solid rgba(220,53,69,0.2);
+  border-radius: 10px;
+  padding: 10px 14px;
+  font-size: 13px;
+  color: #8b2323;
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 20px;
+}
+</style>
+</head>
+
+<body>
+
+<!-- LOADING -->
+<div id="loadingOverlay">
+  <div class="loading-inner">
+    <div class="loading-ring"></div>
+    <div class="loading-text">Mengambil soal Al-Qur'an...</div>
+    <div class="loading-sub">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+  </div>
+</div>
+
+<div class="container mainbox py-5">
+
+  <!-- HERO HEADER -->
+  <div class="header-hero mb-4">
+    <span class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</span>
+    <div class="gold-divider">
+      <span class="gold-star">&#10022;</span>
+      <span class="gold-star">&#10022;</span>
+      <span class="gold-star">&#10022;</span>
+    </div>
+    <h3 class="header-title">&#9992;&nbsp; PAJERO 2026</h3>
+    <p class="header-subtitle">Soal Seputar Al-Qur'an</p>
+  </div>
+
+  <!-- FORM PESERTA -->
+  <div id="formPeserta" class="islamic-card">
+    <div class="card-head">
+      <div class="card-head-icon"><i class="bi bi-person-vcard"></i></div>
+      <div>
+        <div class="card-head-title">Data Peserta</div>
+        <div class="card-head-sub">Lengkapi data diri Anda</div>
+      </div>
+    </div>
+    <div class="card-body-inner">
+
+      <div class="field-group">
+        <label class="field-label">
+          <i class="bi bi-person-fill"></i> Nama Pegawai
+        </label>
+        <input id="nama" class="field-input" placeholder="Masukkan nama lengkap">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">
+          <i class="bi bi-credit-card-2-front-fill"></i> NPP
+        </label>
+        <input id="npp" class="field-input" placeholder="Nomor Pokok Pegawai">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">
+          <i class="bi bi-geo-alt-fill"></i> Region
+        </label>
+        <select id="region" class="field-input">
+          <option value="">— Pilih Region —</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+        </select>
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">
+          <i class="bi bi-building-fill"></i> Unit
+        </label>
+        <input id="unit" class="field-input" placeholder="Contoh: TWU Bekasi">
+      </div>
+
+      <div class="field-group">
+        <label class="field-label">
+          <i class="bi bi-briefcase-fill"></i> Jabatan
+        </label>
+        <select id="jabatan" class="field-input">
+          <option value="">— Pilih Jabatan —</option>
+          <option>GM</option>
+          <option>Ceo Region</option>
+          <option>Deputy</option>
+          <option>Senior Manager</option>
+          <option>Manager</option>
+          <option>Asisten Manager</option>
+          <option>Staf</option>
+        </select>
+      </div>
+
+      <button class="btn-islamic" onclick="mulaiPostTest()">
+        <i class="bi bi-play-circle-fill"></i>
+        Mulai Post Test
+        <i class="bi bi-arrow-right"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- TIMER -->
+  <div id="timerBox" class="hidden">
+    <div>
+      <div class="timer-label">&#8987; Sisa Waktu</div>
+    </div>
+    <span id="timer" class="timer-value">30:00</span>
+    <i class="bi bi-hourglass-split timer-icon"></i>
+  </div>
+
+  <!-- KUIS -->
+  <div id="kuisBox" class="hidden mt-4">
+    <div class="islamic-card">
+      <div class="card-head">
+        <div class="card-head-icon"><i class="bi bi-journal-text"></i></div>
+        <div>
+          <div class="card-head-title">Post Test — Al-Qur'an</div>
+          <div class="card-head-sub">Jawab dengan teliti dan jujur</div>
+        </div>
+      </div>
+      <div class="card-body-inner">
+        <div class="warning-strip">
+          <i class="bi bi-exclamation-triangle-fill"></i>
+          <span>Dilarang berpindah tab atau jendela selama ujian berlangsung.</span>
+        </div>
+        <div id="listSoal"></div>
+        <button class="btn-islamic" onclick="kumpulkan()">
+          <i class="bi bi-send-check-fill"></i>
+          Kumpulkan Jawaban
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HASIL -->
+  <div id="hasilBox" class="hidden mt-4">
+    <div class="hasil-card">
+      <div class="nilai-circle">
+        <span class="nilai-num" id="nilaiNum">—</span>
+        <span class="nilai-label">NILAI</span>
+      </div>
+      <h4 class="hasil-title" id="hasilTitle">Jazākumullāhu Khairan</h4>
+      <p class="hasil-sub" id="hasilSub">Terimakasih atas partisipasinya</p>
+      <span class="hasbunallah" id="hasilExtra">جَزَاكُمُ اللَّهُ خَيْرًا</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header-islamic modal-header border-0">
+        <div style="display:flex;align-items:center;gap:12px;">
+          <div class="card-head-icon"><i class="bi bi-shield-lock-fill"></i></div>
+          <div>
+            <h5 style="margin:0;color:#fff;font-family:'Tajawal',sans-serif;font-weight:700;">Login Akses Test</h5>
+            <small style="color:rgba(255,255,255,0.7);font-weight:300;">Masukkan kredensial Anda</small>
+          </div>
+        </div>
+      </div>
+      <div class="modal-body-islamic">
+        <div class="field-group">
+          <label class="field-label"><i class="bi bi-person"></i> Username</label>
+          <input id="userLogin" class="field-input" placeholder="Username">
+        </div>
+        <div class="field-group" style="margin-bottom:4px;">
+          <label class="field-label"><i class="bi bi-lock-fill"></i> Password</label>
+          <input id="passLogin" type="password" class="field-input" placeholder="Password">
+        </div>
+        <div id="loginError" class="hidden" style="color:#dc3545;font-size:13px;margin-top:8px;display:flex;align-items:center;gap:6px;">
+          <i class="bi bi-x-circle-fill"></i> Username atau password salah.
+        </div>
+      </div>
+      <div class="modal-footer-islamic">
+        <button class="btn-islamic" onclick="cekLogin()">
+          <i class="bi bi-box-arrow-in-right"></i> Masuk
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+const WEBAPP = "https://script.google.com/macros/s/AKfycbz8E91IZo6JwMcKLZ6d01Uu6J-rZzXDfX7BQNe6g7noIK7qX1v7NU-gxMBXQtWar-S2/exec";
+
+const formPeserta = document.getElementById("formPeserta");
+const kuisBox = document.getElementById("kuisBox");
+const hasilBox = document.getElementById("hasilBox");
+const listSoal = document.getElementById("listSoal");
+const loadingOverlay = document.getElementById("loadingOverlay");
+
+let DATA_SOAL = [];
+let USER = {};
+let waktu = 1800;
+let interval;
+
+function mulaiPostTest(){
+    USER.nama = nama.value;
+    USER.npp = npp.value;
+    USER.region = region.value;
+    USER.unit = unit.value;
+    USER.jabatan = jabatan.value;
+    if(!USER.nama || !USER.npp){
+        alert("Nama & NPP wajib diisi");
+        return;
+    }
+    new bootstrap.Modal(document.getElementById('loginModal')).show();
+}
+
+function cekLogin(){
+    if(userLogin.value==="pajero2" && passLogin.value==="alquran"){
+        bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+        mulaiSoal();
+    }else{
+        loginError.classList.remove("hidden");
+        loginError.style.display = "flex";
+    }
+}
+
+async function mulaiSoal(){
+    fetch(WEBAPP+"?action=simpandata",{method:"POST",body:JSON.stringify(USER)});
+    formPeserta.classList.add("hidden");
+    loadingOverlay.style.display="flex";
+
+    const res = await fetch(WEBAPP+"?action=getsoal");
+    DATA_SOAL = await res.json();
+
+    let html="";
+    DATA_SOAL.forEach((s,i)=>{
+        html+=`
+        <div class="soal-box">
+          <span class="soal-number">${i+1}</span>
+          <div class="soal-text">${s.soal}</div>
+          ${["A","B","C","D"].map(p=>`
+            <label class="option-label">
+              <input type="radio" name="soal${i}" value="${p}">
+              <span class="option-badge">${p}</span>
+              <span>${s["opsi"+p]}</span>
+            </label>
+          `).join("")}
+        </div>`;
+    });
+
+    listSoal.innerHTML = html;
+    loadingOverlay.style.display="none";
+    kuisBox.classList.remove("hidden");
+    startTimer();
+}
+
+function startTimer(){
+    document.getElementById("timerBox").classList.remove("hidden");
+    interval = setInterval(()=>{
+        waktu--;
+        let m = Math.floor(waktu/60);
+        let d = waktu%60;
+        const timerEl = document.getElementById("timer");
+        timerEl.innerText = String(m).padStart(2,'0') + ":" + String(d).padStart(2,'0');
+        if(waktu <= 60) timerEl.classList.add("timer-urgent");
+        if(waktu <= 0){ clearInterval(interval); waktuHabis(); }
+    },1000);
+}
+
+function waktuHabis(){ hitungNilai(true); }
+
+function kumpulkan(){ clearInterval(interval); hitungNilai(false); }
+
+function hitungNilai(isTimeout){
+    let benar = 0;
+    DATA_SOAL.forEach((s,i)=>{
+        const j = document.querySelector(`input[name=soal${i}]:checked`);
+        if(j && j.value===s.kunci) benar++;
+    });
+    USER.nilai = Math.round((benar/DATA_SOAL.length)*100);
+    fetch(WEBAPP+"?action=simpannilai",{method:"POST",body:JSON.stringify(USER)});
+
+    kuisBox.classList.add("hidden");
+    document.getElementById("timerBox").classList.add("hidden");
+    hasilBox.classList.remove("hidden");
+
+    document.getElementById("nilaiNum").textContent = USER.nilai;
+    if(isTimeout){
+        document.getElementById("hasilTitle").textContent = "Waktu Habis!";
+        document.getElementById("hasilSub").textContent = "Waktu ujian telah berakhir. Terimakasih atas partisipasinya.";
+        document.getElementById("hasilExtra").textContent = "⛔ Waktu telah habis";
+        document.getElementById("hasilExtra").style.fontFamily = "'Tajawal', sans-serif";
+        document.getElementById("hasilExtra").style.fontSize = "15px";
+    }
+}
+
+let curangCount = 0;
+document.addEventListener("visibilitychange", function(){
+    if(document.hidden && !kuisBox.classList.contains("hidden")){
+        curangCount++;
+        fetch(WEBAPP+"?action=curang",{method:"POST",body:JSON.stringify(USER)});
+        alert("⚠️ Dilarang pindah tab! Aktivitas Anda tercatat.");
+    }
+});
+</script>
+</body>
+</html>
