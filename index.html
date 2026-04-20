@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PAJERO – PT SSI | Program Perjalanan Rohani</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Tajawal:wght@300;400;500;700&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+  --gold:       #C9A84C;
+  --gold-light: #F0D080;
+  --gold-dark:  #8B6914;
+  --emerald:    #0D4A2F;
+  --emerald-mid:#176341;
+  --emerald-light:#2E8B57;
+  --cream:      #FAF6EE;
+  --cream-dark: #EDE5D0;
+  --text-dark:  #1A1209;
+  --text-mid:   #4A3B1A;
+  --white:      #FFFFFF;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text-dark);
+  overflow-x: hidden;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--cream-dark); }
+::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 3px; }
+
+/* ─── NAVBAR ─── */
+.navbar-custom {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  padding: 16px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: transparent;
+  transition: all 0.5s ease;
+}
+
+.navbar-custom.scrolled {
+  background: rgba(13, 74, 47, 0.95);
+  backdrop-filter: blur(12px);
+  padding: 10px 40px;
+  box-shadow: 0 4px 30px rgba(0,0,0,0.3);
+}
+
+.nav-logo {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-light);
+  font-size: 1.3rem;
+  letter-spacing: 3px;
+  text-decoration: none;
+}
+
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  color: rgba(255,255,255,0.85);
+  text-decoration: none;
+  font-size: 0.88rem;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold-light); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: 100vh;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, rgba(10,30,18,0.7) 0%, rgba(10,30,18,0.5) 50%, rgba(10,30,18,0.85) 100%),
+    url('https://images.unsplash.com/photo-1580418827493-f2b22c0a76cb?q=80&w=1920') center/cover no-repeat;
+  transform: scale(1.05);
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1.05); }
+  to   { transform: scale(1.12); }
+}
+
+/* Geometric overlay */
+.hero-bg::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 80% at 50% 100%, rgba(201,168,76,0.12) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 20% 20%, rgba(13,74,47,0.4) 0%, transparent 60%);
+}
+
+/* Arabic calligraphy watermark */
+.hero-arabic {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: 'Tajawal', sans-serif;
+  font-size: clamp(180px, 30vw, 400px);
+  color: rgba(201,168,76,0.06);
+  pointer-events: none;
+  white-space: nowrap;
+  user-select: none;
+  line-height: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  padding: 0 20px;
+}
+
+.hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 100px;
+  padding: 6px 20px;
+  color: var(--gold-light);
+  font-size: 0.78rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeDown 1s ease 0.2s both;
+}
+
+.hero-eyebrow::before,
+.hero-eyebrow::after {
+  content: '✦';
+  font-size: 10px;
+  opacity: 0.7;
+}
+
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(3rem, 8vw, 7rem);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 0.95;
+  letter-spacing: -1px;
+  margin-bottom: 8px;
+  animation: fadeDown 1s ease 0.4s both;
+}
+
+.hero-title span {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: block;
+}
+
+.hero-subtitle {
+  font-family: 'Tajawal', sans-serif;
+  font-size: clamp(1rem, 2.5vw, 1.35rem);
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+  animation: fadeDown 1s ease 0.55s both;
+}
+
+.hero-divider {
+  width: 100px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  margin: 24px auto;
+  animation: expand 1s ease 0.7s both;
+}
+
+.hero-desc {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.65);
+  max-width: 540px;
+  margin: 0 auto 40px;
+  line-height: 1.8;
+  animation: fadeUp 1s ease 0.8s both;
+}
+
+.hero-cta {
+  display: inline-flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+  animation: fadeUp 1s ease 1s both;
+}
+
+.btn-gold {
+  background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+  color: var(--text-dark);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 30%, rgba(255,255,255,0.3) 50%, transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-gold:hover::before { transform: translateX(100%); }
+.btn-gold:hover { transform: translateY(-3px); box-shadow: 0 12px 35px rgba(201,168,76,0.4); color: var(--text-dark); }
+
+.btn-outline-hero {
+  background: transparent;
+  color: var(--white);
+  font-weight: 500;
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 14px 36px;
+  border: 1px solid rgba(255,255,255,0.35);
+  border-radius: 2px;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  text-decoration: none;
+}
+
+.btn-outline-hero:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: var(--gold-light);
+  color: var(--gold-light);
+  transform: translateY(-3px);
+}
+
+/* Scroll indicator */
+.scroll-hint {
+  position: absolute;
+  bottom: 36px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  color: rgba(255,255,255,0.4);
+  font-size: 0.7rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  animation: fadeUp 1s ease 1.5s both;
+}
+
+.scroll-line {
+  width: 1px;
+  height: 50px;
+  background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+  animation: scrollLine 2s ease-in-out infinite;
+}
+
+@keyframes scrollLine {
+  0%, 100% { transform: scaleY(1); opacity: 1; }
+  50% { transform: scaleY(0.5); opacity: 0.3; }
+}
+
+/* ─── ORNAMENT DIVIDER ─── */
+.ornament-divider {
+  text-align: center;
+  padding: 20px 0;
+  color: var(--gold);
+  font-size: 1.2rem;
+  letter-spacing: 12px;
+  opacity: 0.6;
+}
+
+/* ─── SECTION WRAPPER ─── */
+.section-wrap {
+  padding: 100px 0;
+  position: relative;
+}
+
+.section-wrap.bg-dark-green {
+  background: linear-gradient(135deg, var(--emerald) 0%, #0a3520 100%);
+  color: white;
+}
+
+.section-wrap.bg-cream {
+  background: var(--cream);
+}
+
+.section-wrap.bg-pattern {
+  background-color: var(--cream-dark);
+  background-image:
+    radial-gradient(circle at 1px 1px, rgba(201,168,76,0.15) 1px, transparent 0);
+  background-size: 32px 32px;
+}
+
+/* Section header */
+.sec-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  color: var(--gold);
+  font-size: 0.72rem;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+}
+
+.sec-eyebrow::before,
+.sec-eyebrow::after {
+  content: '';
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.5;
+}
+
+.sec-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3.2rem);
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.1;
+  margin-bottom: 60px;
+}
+
+.sec-title.light { color: var(--white); }
+.sec-title.dark  { color: var(--emerald); }
+
+/* ─── STATS STRIP ─── */
+.stats-strip {
+  background: linear-gradient(135deg, var(--gold-dark), var(--gold), var(--gold-dark));
+  padding: 50px 0;
+}
+
+.stat-item { text-align: center; }
+
+.stat-number {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--emerald);
+  line-height: 1;
+}
+
+.stat-label {
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--emerald-mid);
+  margin-top: 6px;
+}
+
+/* ─── PURPOSE CARDS ─── */
+.purpose-card {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 40px 32px;
+  border-left: 3px solid var(--gold);
+  transition: all 0.4s ease;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.purpose-card::before {
+  content: '';
+  position: absolute;
+  top: 0; right: 0;
+  width: 60px; height: 60px;
+  background: linear-gradient(135deg, transparent 50%, rgba(201,168,76,0.08) 50%);
+}
+
+.purpose-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 24px 50px rgba(13,74,47,0.12);
+  border-left-color: var(--emerald);
+}
+
+.purpose-icon {
+  width: 52px; height: 52px;
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+  border-radius: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--gold-light);
+  font-size: 1.3rem;
+  margin-bottom: 20px;
+}
+
+.purpose-card h5 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--emerald);
+  margin-bottom: 12px;
+}
+
+.purpose-card p {
+  font-size: 0.92rem;
+  line-height: 1.8;
+  color: var(--text-mid);
+}
+
+/* Winner card */
+.winner-card {
+  background: linear-gradient(135deg, var(--emerald), #0a3520);
+  border-radius: 4px;
+  padding: 48px 40px;
+  color: white;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.winner-card::before {
+  content: '✦';
+  position: absolute;
+  font-size: 200px;
+  opacity: 0.04;
+  top: -40px;
+  right: -30px;
+  color: var(--gold);
+}
+
+.winner-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(201,168,76,0.2);
+  border: 1px solid rgba(201,168,76,0.4);
+  border-radius: 100px;
+  padding: 6px 20px;
+  color: var(--gold-light);
+  font-size: 0.8rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.winner-card h5 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  margin-bottom: 16px;
+}
+
+.wilayah-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 4px;
+  padding: 14px 20px;
+  margin: 8px 0;
+  font-size: 0.92rem;
+  border-left: 2px solid rgba(201,168,76,0.4);
+}
+
+/* ─── BATCH CAROUSEL ─── */
+.batch-section {
+  background: linear-gradient(to bottom right, var(--emerald) 0%, #061f10 100%);
+  padding: 100px 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.batch-section::before {
+  content: '';
+  position: absolute;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.08);
+  top: -200px; right: -200px;
+}
+
+.batch-section::after {
+  content: '';
+  position: absolute;
+  width: 400px; height: 400px;
+  border-radius: 50%;
+  border: 1px solid rgba(201,168,76,0.05);
+  bottom: -100px; left: -100px;
+}
+
+.carousel-custom .carousel-item img {
+  height: 360px;
+  object-fit: cover;
+  border-radius: 3px;
+  filter: brightness(0.85) saturate(0.9);
+}
+
+.carousel-custom .carousel-item::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,30,18,0.7) 0%, transparent 60%);
+  border-radius: 3px;
+}
+
+.batch-info-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(201,168,76,0.2);
+  border-radius: 4px;
+  padding: 40px 36px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.batch-info-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+
+.batch-number {
+  font-family: 'Cinzel', serif;
+  font-size: 4.5rem;
+  font-weight: 700;
+  color: rgba(201,168,76,0.12);
+  line-height: 1;
+  margin-bottom: -20px;
+}
+
+.batch-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  color: var(--gold-light);
+  margin-bottom: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.batch-desc {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.92rem;
+  line-height: 1.8;
+  position: relative;
+  z-index: 1;
+}
+
+.carousel-custom .carousel-control-prev,
+.carousel-custom .carousel-control-next {
+  width: 44px; height: 44px;
+  top: 50%; transform: translateY(-50%);
+  border-radius: 50%;
+  background: rgba(201,168,76,0.2);
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ─── SYARAT CARDS ─── */
+.syarat-card {
+  background: var(--white);
+  border-radius: 4px;
+  padding: 40px 28px;
+  text-align: center;
+  transition: all 0.4s ease;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.syarat-card::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(to right, var(--gold-dark), var(--gold-light));
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+  transform-origin: left;
+}
+
+.syarat-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 30px 60px rgba(13,74,47,0.1);
+}
+
+.syarat-card:hover::after { transform: scaleX(1); }
+
+.syarat-icon-wrap {
+  width: 80px; height: 80px;
+  margin: 0 auto 24px;
+  background: linear-gradient(135deg, var(--cream), var(--cream-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 2px solid rgba(201,168,76,0.2);
+  transition: all 0.4s;
+}
+
+.syarat-card:hover .syarat-icon-wrap {
+  background: linear-gradient(135deg, var(--emerald), var(--emerald-light));
+  border-color: transparent;
+}
+
+.syarat-card:hover .syarat-icon-wrap i {
+  color: var(--gold-light) !important;
+}
+
+.syarat-icon-wrap i {
+  font-size: 1.8rem;
+  color: var(--emerald);
+  transition: color 0.4s;
+}
+
+.syarat-card h5 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--emerald);
+  margin-bottom: 10px;
+}
+
+.syarat-card p {
+  font-size: 0.9rem;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+/* ─── RULES SECTION ─── */
+.rules-section {
+  background: linear-gradient(135deg, #0a3520 0%, var(--emerald) 50%, #082b18 100%);
+  padding: 100px 0;
+  position: relative;
+}
+
+.rule-card {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 4px;
+  padding: 36px 28px;
+  text-align: center;
+  height: 100%;
+  transition: all 0.4s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.rule-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(to right, transparent, var(--gold), transparent);
+  transform: scaleX(0);
+  transition: transform 0.4s ease;
+}
+
+.rule-card:hover {
+  background: rgba(255,255,255,0.08);
+  transform: translateY(-6px);
+}
+
+.rule-card:hover::before { transform: scaleX(1); }
+
+.rule-number {
+  font-family: 'Cinzel', serif;
+  font-size: 3rem;
+  color: rgba(201,168,76,0.15);
+  line-height: 1;
+  margin-bottom: -10px;
+}
+
+.rule-card i { font-size: 2rem; color: var(--gold); margin-bottom: 16px; display: block; }
+
+.rule-card h5 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.25rem;
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.rule-card p {
+  font-size: 0.88rem;
+  color: rgba(255,255,255,0.55);
+  line-height: 1.7;
+}
+
+.rule-alert {
+  margin-top: 12px;
+  padding: 10px 14px;
+  border-radius: 3px;
+  font-size: 0.82rem;
+}
+
+.alert-danger-custom {
+  background: rgba(220,53,69,0.15);
+  border: 1px solid rgba(220,53,69,0.3);
+  color: #ff8a8a;
+}
+
+.alert-warning-custom {
+  background: rgba(201,168,76,0.15);
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--gold-light);
+}
+
+.alert-info-custom {
+  background: rgba(46,139,87,0.2);
+  border: 1px solid rgba(46,139,87,0.3);
+  color: #80e8b0;
+}
+
+/* ─── CTA BANNER ─── */
+.cta-banner {
+  background:
+    linear-gradient(rgba(10,30,18,0.82), rgba(10,30,18,0.82)),
+    url('https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=1920') center/cover no-repeat fixed;
+  padding: 100px 0;
+  text-align: center;
+  position: relative;
+}
+
+.cta-banner h2 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--white);
+  margin-bottom: 12px;
+}
+
+.cta-banner p {
+  color: rgba(255,255,255,0.6);
+  font-size: 1rem;
+  margin-bottom: 36px;
+}
+
+/* ─── SOAL CARDS ─── */
+.soal-card {
+  border-radius: 4px;
+  overflow: hidden;
+  border: none;
+  transition: all 0.4s ease;
+  background: var(--white);
+  position: relative;
+}
+
+.soal-card::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: border-color 0.4s;
+  pointer-events: none;
+}
+
+.soal-card:hover {
+  transform: translateY(-12px);
+  box-shadow: 0 30px 60px rgba(13,74,47,0.15);
+}
+
+.soal-card:hover::after {
+  border-color: var(--gold);
+}
+
+.soal-card-img-wrap {
+  position: relative;
+  overflow: hidden;
+  height: 220px;
+}
+
+.soal-card-img-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+  filter: saturate(0.8);
+}
+
+.soal-card:hover .soal-card-img-wrap img {
+  transform: scale(1.08);
+  filter: saturate(1);
+}
+
+.soal-card-img-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(13,74,47,0.6) 0%, transparent 60%);
+}
+
+.soal-category-badge {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: rgba(201,168,76,0.9);
+  color: var(--text-dark);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  border-radius: 2px;
+  z-index: 1;
+}
+
+.soal-card-body {
+  padding: 28px 24px;
+  text-align: center;
+}
+
+.soal-card-body h5 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--emerald);
+  margin-bottom: 8px;
+}
+
+.soal-card-body p {
+  font-size: 0.88rem;
+  color: var(--text-mid);
+  margin-bottom: 20px;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: #06180d;
+  padding: 60px 0 30px;
+  color: rgba(255,255,255,0.5);
+}
+
+.footer-logo {
+  font-family: 'Cinzel', serif;
+  color: var(--gold-light);
+  font-size: 1.4rem;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.35);
+  line-height: 1.7;
+  max-width: 320px;
+}
+
+.footer-divider {
+  border-color: rgba(255,255,255,0.06);
+  margin: 40px 0 24px;
+}
+
+.footer-copy {
+  font-size: 0.82rem;
+  text-align: center;
+  color: rgba(255,255,255,0.25);
+}
+
+.footer-gold { color: var(--gold); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes expand {
+  from { width: 0; opacity: 0; }
+  to   { width: 100px; opacity: 1; }
+}
+
+/* Intersection Observer animations */
+.reveal {
+  opacity: 0;
+  transform: translateY(36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-left.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.reveal-right {
+  opacity: 0;
+  transform: translateX(36px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal-right.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+/* Delay helpers */
+.d1 { transition-delay: 0.1s; }
+.d2 { transition-delay: 0.2s; }
+.d3 { transition-delay: 0.3s; }
+.d4 { transition-delay: 0.4s; }
+.d5 { transition-delay: 0.5s; }
+
+/* ─── PROGRESS TRACKER ─── */
+.progress-bar-custom {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  background: linear-gradient(to right, var(--gold-dark), var(--gold-light));
+  z-index: 9999;
+  width: 0%;
+  transition: width 0.1s linear;
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+  .navbar-custom { padding: 14px 20px; }
+  .nav-links { display: none; }
+  .hero { min-height: 100svh; }
+  .section-wrap { padding: 70px 0; }
+  .batch-section { padding: 70px 0; }
+  .rules-section { padding: 70px 0; }
+}
+</style>
+</head>
+<body>
+
+<!-- Progress bar -->
+<div class="progress-bar-custom" id="progressBar"></div>
+
+<!-- NAVBAR -->
+<nav class="navbar-custom" id="navbar">
+  <a href="#" class="nav-logo">✦ PAJERO</a>
+  <ul class="nav-links">
+    <li><a href="#tujuan">Tujuan</a></li>
+    <li><a href="#syarat">Syarat</a></li>
+    <li><a href="#peraturan">Peraturan</a></li>
+    <li><a href="#soal">Kategori Soal</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-arabic">بسم الله</div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Program Perjalanan Rohani PT SSI</div>
+    <h1 class="hero-title">
+      PAJERO
+      <span>Umroh 2026</span>
+    </h1>
+    <p class="hero-subtitle">Program Award Ibadah Pegawai Terpilih</p>
+    <div class="hero-divider"></div>
+    <p class="hero-desc">
+      Meraih ridha Allah melalui perjalanan suci ke Baitullah —
+      penghargaan tertinggi bagi pegawai PT SSI yang berprestasi dan berakhlak mulia.
+    </p>
+    <div class="hero-cta">
+      <a href="#tujuan" class="btn-gold">Daftar Sekarang</a>
+      <a href="#soal" class="btn-outline-hero">Mulai Test</a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<div class="stats-strip">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-6 col-md-3 stat-item reveal d1">
+        <div class="stat-number" data-count="3">3</div>
+        <div class="stat-label">Batch Terlaksana</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal d2">
+        <div class="stat-number" data-count="9">9</div>
+        <div class="stat-label">Pegawai Diberangkatkan</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal d3">
+        <div class="stat-number" data-count="3">3</div>
+        <div class="stat-label">Wilayah Peserta</div>
+      </div>
+      <div class="col-6 col-md-3 stat-item reveal d4">
+        <div class="stat-number">2026</div>
+        <div class="stat-label">Batch Selanjutnya</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ MAKSUD & TUJUAN ═══ -->
+<section class="section-wrap bg-cream" id="tujuan">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="sec-eyebrow">Latar Belakang</div>
+      <h2 class="sec-title dark">Maksud & Tujuan <br>Program Pajero</h2>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-6 reveal d1">
+        <div class="purpose-card h-100">
+          <div class="purpose-icon"><i class="bi bi-heart-pulse"></i></div>
+          <h5>Well Being Pegawai</h5>
+          <p>Membuat pegawai merasa senang dan bahagia secara bathin serta ruhiyahnya, dengan adanya kesempatan untuk melakukan perjalanan rohani sesuai dengan keyakinannya.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 reveal d2">
+        <div class="purpose-card h-100">
+          <div class="purpose-icon"><i class="bi bi-stars"></i></div>
+          <h5>Budaya 4.O</h5>
+          <p>Bagian dari komponen budaya 4.O perusahaan yang mencakup empat pilar: <strong>Olah Rasa / Empati</strong>, <strong>Olah Pikir</strong>, <strong>Olah Raga</strong>, dan <strong>Olah Ruhani</strong> — menjaga keseimbangan holistik pegawai.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 reveal d3">
+        <div class="purpose-card h-100">
+          <div class="purpose-icon"><i class="bi bi-people-fill"></i></div>
+          <h5>Untuk Siapa?</h5>
+          <p>Seluruh pegawai PT SSI dari berbagai latar belakang dapat mengikuti program ini, selama memenuhi syarat dan kriteria penilaian yang telah ditetapkan oleh Divisi HCC.</p>
+        </div>
+      </div>
+
+      <div class="col-md-6 reveal d4">
+        <div class="purpose-card h-100">
+          <div class="purpose-icon"><i class="bi bi-journal-bookmark-fill"></i></div>
+          <h5>Regulasi Program</h5>
+          <p>Regulasi dan proses assessment disusun oleh Divisi HCC dan dapat berubah sewaktu-waktu sesuai arahan dari BOD perusahaan.</p>
+        </div>
+      </div>
+
+      <div class="col-12 reveal d5">
+        <div class="winner-card">
+          <div class="winner-badge"><i class="bi bi-trophy-fill"></i> The Winner</div>
+          <h5>3 Pemenang Terpilih Per Wilayah</h5>
+          <p style="color:rgba(255,255,255,0.55); font-size:0.9rem; margin-bottom:24px;">
+            Setiap tahun, 3 pegawai terbaik dari wilayahnya masing-masing mendapatkan kesempatan berangkat ke Tanah Suci.
+          </p>
+          <div class="row g-3 justify-content-center">
+            <div class="col-md-4">
+              <div class="wilayah-item"><i class="bi bi-building text-warning"></i> Wilayah Pusat</div>
+            </div>
+            <div class="col-md-4">
+              <div class="wilayah-item"><i class="bi bi-gear text-warning"></i> Wilayah OPR-1</div>
+            </div>
+            <div class="col-md-4">
+              <div class="wilayah-item"><i class="bi bi-globe text-warning"></i> Wilayah OPR-2</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BATCH CAROUSEL ═══ -->
+<section class="batch-section">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="sec-eyebrow" style="color:var(--gold);">Rekam Jejak</div>
+      <h2 class="sec-title light">Perjalanan Suci<br>Batch Sebelumnya</h2>
+    </div>
+
+    <div class="row g-5 align-items-center">
+
+      <!-- Carousel -->
+      <div class="col-md-7 reveal-left">
+        <div id="carouselExample" class="carousel slide carousel-custom" data-bs-ride="carousel" data-bs-interval="3500">
+          <div class="carousel-inner">
+
+            <div class="carousel-item active">
+              <img src="pajero1.webp" class="d-block w-100" alt="Batch 1">
+              <div style="position:absolute;bottom:20px;left:24px;z-index:2;color:white;">
+                <div style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:3px;opacity:0.7;">BATCH 01 — 2023</div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="pajero2.webp" class="d-block w-100" alt="Batch 2">
+              <div style="position:absolute;bottom:20px;left:24px;z-index:2;color:white;">
+                <div style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:3px;opacity:0.7;">BATCH 02 — 2024</div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="pajero3.webp" class="d-block w-100" alt="Batch 3">
+              <div style="position:absolute;bottom:20px;left:24px;z-index:2;color:white;">
+                <div style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:3px;opacity:0.7;">BATCH 03 — 2025</div>
+              </div>
+            </div>
+
+            <div class="carousel-item">
+              <img src="pajero4.webp" class="d-block w-100" alt="Batch 4">
+              <div style="position:absolute;bottom:20px;left:24px;z-index:2;color:white;">
+                <div style="font-family:'Cinzel',serif;font-size:0.75rem;letter-spacing:3px;opacity:0.7;">BATCH 04 — 2026</div>
+              </div>
+            </div>
+
+          </div>
+          <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <i class="bi bi-chevron-left" style="color:var(--gold-light);font-size:1.1rem;"></i>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <i class="bi bi-chevron-right" style="color:var(--gold-light);font-size:1.1rem;"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Batch Info -->
+      <div class="col-md-5 reveal-right">
+        <div class="batch-info-card">
+          <div class="batch-number" id="batchNum">01</div>
+          <div class="batch-title" id="batchTitle">Pajero Batch 1 — Agustus 2023</div>
+          <div class="batch-desc" id="batchDesc">Peserta: Bagus Tri Prasetyo, Muhammad Irsyad, Andri Yuwana</div>
+          <div style="margin-top:28px;display:flex;gap:8px;">
+            <div style="width:24px;height:2px;background:var(--gold);border-radius:2px;" id="dot0" class="batch-dot active-dot"></div>
+            <div style="width:8px;height:2px;background:rgba(255,255,255,0.2);border-radius:2px;" id="dot1" class="batch-dot"></div>
+            <div style="width:8px;height:2px;background:rgba(255,255,255,0.2);border-radius:2px;" id="dot2" class="batch-dot"></div>
+            <div style="width:8px;height:2px;background:rgba(255,255,255,0.2);border-radius:2px;" id="dot3" class="batch-dot"></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SYARAT ═══ -->
+<section class="section-wrap bg-pattern" id="syarat">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="sec-eyebrow">Persyaratan</div>
+      <h2 class="sec-title dark">Syarat Mengikuti<br>Program Pajero</h2>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-4 reveal d1">
+        <div class="syarat-card">
+          <div class="syarat-icon-wrap">
+            <i class="bi bi-calendar2-check"></i>
+          </div>
+          <h5>Masa Kerja</h5>
+          <p>Minimal masa kerja <strong>≥ 2 tahun</strong> aktif di PT SSI sebagai pegawai tetap.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal d2">
+        <div class="syarat-card">
+          <div class="syarat-icon-wrap">
+            <i class="bi bi-patch-check"></i>
+          </div>
+          <h5>Disiplin & Perilaku</h5>
+          <p>Tidak pernah menerima <strong>Surat Peringatan (SP)</strong> dalam kurun waktu 1 tahun terakhir.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal d3">
+        <div class="syarat-card">
+          <div class="syarat-icon-wrap">
+            <i class="bi bi-fingerprint"></i>
+          </div>
+          <h5>Absensi HRIS</h5>
+          <p>Memiliki rekam <strong>absensi dan kehadiran</strong> yang baik sesuai data sistem HRIS perusahaan.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PERATURAN TEST ═══ -->
+<section class="rules-section" id="peraturan">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="sec-eyebrow" style="color:var(--gold);">Tata Tertib</div>
+      <h2 class="sec-title light">Peraturan<br>Saat Test Pajero</h2>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-4 reveal d1">
+        <div class="rule-card">
+          <div class="rule-number">01</div>
+          <i class="bi bi-laptop"></i>
+          <h5>Gunakan Laptop / PC</h5>
+          <p>Peserta disarankan menggunakan <strong>Laptop atau PC</strong> agar pengerjaan test lebih optimal dan nyaman.</p>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal d2">
+        <div class="rule-card">
+          <div class="rule-number">02</div>
+          <i class="bi bi-camera-video-fill"></i>
+          <h5>Kamera Wajib Aktif</h5>
+          <p>Kamera <strong>wajib ON</strong> selama test berlangsung. Tim Observer memantau melalui Zoom.</p>
+          <div class="rule-alert alert-danger-custom">❗ Kamera OFF = Diskualifikasi</div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal d3">
+        <div class="rule-card">
+          <div class="rule-number">03</div>
+          <i class="bi bi-stopwatch-fill"></i>
+          <h5>Timer Berjalan Otomatis</h5>
+          <p>Setelah tombol <strong>Mulai Test</strong> diklik, timer langsung aktif tanpa jeda.</p>
+          <div class="rule-alert alert-warning-custom">⏳ 60 detik / soal</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 reveal d4">
+        <div class="rule-card">
+          <div class="rule-number">04</div>
+          <i class="bi bi-send-check-fill"></i>
+          <h5>Auto Submit</h5>
+          <p>Jika waktu habis, sistem otomatis melakukan <strong>submit jawaban</strong>. Tidak ada tambahan waktu.</p>
+          <div class="rule-alert alert-info-custom">ℹ️ Tidak ada perpanjangan waktu</div>
+        </div>
+      </div>
+
+      <div class="col-md-6 reveal d5">
+        <div class="rule-card">
+          <div class="rule-number">05</div>
+          <i class="bi bi-slash-circle-fill"></i>
+          <h5>Dilarang Membuka Tab Lain</h5>
+          <p>Peserta <strong>tidak boleh</strong> membuka tab atau aplikasi lain selama test berlangsung.</p>
+          <div class="rule-alert alert-danger-custom">🚫 Sistem deteksi aktivitas curang (Google, AI, dll)</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CTA BANNER ═══ -->
+<section class="cta-banner">
+  <div class="container reveal">
+    <div class="sec-eyebrow" style="color:var(--gold); justify-content:center;">Peserta Pajero 2026</div>
+    <h2>Lihat Siapa Saja<br>Peserta Terpilih Tahun Ini</h2>
+    <p>Daftar peserta Pajero 2026 telah tersedia. Silakan kunjungi halaman peserta untuk informasi lengkap.</p>
+    <button class="btn-gold" onclick="goPeserta()">
+      🕋 &nbsp; Klik Peserta Pajero 2026
+    </button>
+  </div>
+</section>
+
+<!-- ═══ KATEGORI SOAL ═══ -->
+<section class="section-wrap bg-cream" id="soal">
+  <div class="container">
+
+    <div class="reveal">
+      <div class="sec-eyebrow">Assessment</div>
+      <h2 class="sec-title dark">Kategori Soal<br>Program Pajero</h2>
+    </div>
+
+    <div class="row g-4">
+
+      <div class="col-md-4 reveal d1">
+        <div class="soal-card">
+          <div class="soal-card-img-wrap">
+            <span class="soal-category-badge">Ibadah</span>
+            <img src="https://images.unsplash.com/photo-1591604129939-f1efa4d9f7fa?q=80&w=1200" alt="Umroh">
+          </div>
+          <div class="soal-card-body">
+            <h5>🕋 Umroh & Sejarah</h5>
+            <p>Pengetahuan tentang tata cara ibadah Umroh dan sejarah peradaban Islam</p>
+            <button class="btn-gold w-100" onclick="mulaiTest('umroh')">
+              <i class="bi bi-play-circle"></i> &nbsp; Mulai Test
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal d2">
+        <div class="soal-card">
+          <div class="soal-card-img-wrap">
+            <span class="soal-category-badge">Kitabullah</span>
+            <img src="https://images.unsplash.com/photo-1609599006353-e629aaabfeae?q=80&w=1200" alt="Al-Quran">
+          </div>
+          <div class="soal-card-body">
+            <h5>📖 Al-Qur'an</h5>
+            <p>Pemahaman ayat-ayat Al-Qur'an, tajwid, serta syariat Islam sehari-hari</p>
+            <button class="btn-gold w-100" onclick="mulaiTest('alquran')">
+              <i class="bi bi-book"></i> &nbsp; Mulai Test
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-4 reveal d3">
+        <div class="soal-card">
+          <div class="soal-card-img-wrap">
+            <span class="soal-category-badge">Akhlak</span>
+            <img src="https://images.unsplash.com/photo-1519817650390-64a93db51149?q=80&w=1200" alt="Akhlak">
+          </div>
+          <div class="soal-card-body">
+            <h5>🌿 Akhlak & Iman</h5>
+            <p>Ujian akhlak mulia, keimanan, dan penerapan nilai Islam dalam kehidupan</p>
+            <button class="btn-gold w-100" onclick="mulaiTest('akhlak')">
+              <i class="bi bi-heart"></i> &nbsp; Mulai Test
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="container">
+    <div class="row g-4 align-items-start">
+      <div class="col-md-5">
+        <div class="footer-logo">✦ PAJERO</div>
+        <p class="footer-tagline">
+          Program Perjalanan Rohani PT SSI — menghantarkan pegawai terpilih meraih keberkahan di Baitullah, sebuah penghargaan tertinggi atas dedikasi dan akhlak mulia.
+        </p>
+      </div>
+      <div class="col-md-3 offset-md-1">
+        <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">Navigasi</p>
+        <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:10px;">
+          <li><a href="#tujuan" style="color:rgba(255,255,255,0.45);font-size:0.88rem;text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Maksud & Tujuan</a></li>
+          <li><a href="#syarat" style="color:rgba(255,255,255,0.45);font-size:0.88rem;text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Syarat Peserta</a></li>
+          <li><a href="#peraturan" style="color:rgba(255,255,255,0.45);font-size:0.88rem;text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Peraturan Test</a></li>
+          <li><a href="#soal" style="color:rgba(255,255,255,0.45);font-size:0.88rem;text-decoration:none;transition:color 0.3s;" onmouseover="this.style.color='var(--gold-light)'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Kategori Soal</a></li>
+        </ul>
+      </div>
+      <div class="col-md-3">
+        <p style="color:rgba(255,255,255,0.4);font-size:0.75rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:16px;">Info</p>
+        <p style="color:rgba(255,255,255,0.4);font-size:0.88rem;line-height:1.8;">Divisi HCC<br>PT SSI<br><span style="color:var(--gold);opacity:0.7;">Batch 4 · 2026</span></p>
+      </div>
+    </div>
+    <hr class="footer-divider">
+    <p class="footer-copy">
+      © 2026 PT SSI — Program <span class="footer-gold">Pajero</span> Islami · Semua Hak Dilindungi
+    </p>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+/* ─── NAVBAR SCROLL ─── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+/* ─── PROGRESS BAR ─── */
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => {
+  const scrollTop = window.scrollY;
+  const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+  const progress = (scrollTop / docHeight) * 100;
+  progressBar.style.width = progress + '%';
+});
+
+/* ─── INTERSECTION OBSERVER ─── */
+const observerOpts = { threshold: 0.12 };
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+    }
+  });
+}, observerOpts);
+
+document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+  observer.observe(el);
+});
+
+/* ─── BATCH DATA ─── */
+const batchData = [
+  { num: '01', title: 'Pajero Batch 1 — Agustus 2023', desc: 'Peserta: Bagus Tri Prasetyo, Muhammad Irsyad, Andri Yuwana' },
+  { num: '02', title: 'Pajero Batch 2 — September 2024', desc: 'Peserta: Dede Yuswanto, Akhmad Kurnia, Heru Kurniawan' },
+  { num: '03', title: 'Pajero Batch 3 — September 2025', desc: 'Peserta: Budi Hariyanto, Sri Wahyuningsih, Dedi Rasyid' },
+  { num: '04', title: 'Pajero Batch 4 — Akan Segera Dimulai', desc: 'Peserta akan diumumkan pada Ultah PT SSI tahun 2026. Persiapkan dirimu!' }
+];
+
+const carousel = document.getElementById('carouselExample');
+
+carousel.addEventListener('slid.bs.carousel', (e) => {
+  const idx = e.to;
+  const d = batchData[idx];
+
+  document.getElementById('batchNum').textContent   = d.num;
+  document.getElementById('batchTitle').textContent = d.title;
+  document.getElementById('batchDesc').textContent  = d.desc;
+
+  // dots
+  document.querySelectorAll('.batch-dot').forEach((dot, i) => {
+    dot.style.width = i === idx ? '24px' : '8px';
+    dot.style.background = i === idx ? 'var(--gold)' : 'rgba(255,255,255,0.2)';
+  });
+});
+
+/* ─── NAVIGATION ─── */
+function goPeserta() {
+  window.location.href = 'datapeserta.html';
+}
+
+function mulaiTest(kategori) {
+  window.location.href = 'pengumuman.html';
+}
+
+/* ─── COUNTER ANIMATION ─── */
+function animateCounter(el) {
+  const target = parseInt(el.getAttribute('data-count'));
+  if (!target) return;
+  let current = 0;
+  const step = Math.ceil(target / 30);
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = current;
+  }, 40);
+}
+
+const counterObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      animateCounter(e.target);
+      counterObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('[data-count]').forEach(el => {
+  counterObserver.observe(el);
+});
+</script>
+
+</body>
+</html>
