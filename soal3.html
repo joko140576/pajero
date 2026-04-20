@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<title>Pelatihan PT SSI</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --gold:#c9a84c;
+  --gold-light:#f0d080;
+  --gold-dark:#7a5c1e;
+  --blue-deep:#0a1628;
+  --blue-mid:#0d2444;
+  --blue-soft:#1a3a6e;
+  --blue-accent:#2563eb;
+  --blue-glow:#3b82f6;
+  --blue-light:#dbeafe;
+  --cream:#fdf9f0;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  background:var(--blue-deep);
+  font-family:'Poppins',sans-serif;
+  min-height:100vh;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* ===== ANIMATED BACKGROUND ===== */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+  background:
+    radial-gradient(ellipse 800px 600px at 20% 20%, rgba(37,99,235,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 800px at 80% 80%, rgba(201,168,76,0.08) 0%, transparent 70%),
+    linear-gradient(160deg, #0a1628 0%, #0d2444 50%, #0a1628 100%);
+  z-index:-2;
+}
+
+/* Floating geometric Islamic pattern */
+.geo-bg{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+  overflow:hidden;
+  pointer-events:none;
+}
+.geo-bg svg{
+  width:100%;height:100%;
+  opacity:.04;
+}
+
+/* ===== STARFIELD ===== */
+.stars{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;
+}
+.star{
+  position:absolute;
+  width:2px;height:2px;
+  background:#fff;
+  border-radius:50%;
+  animation:twinkle var(--d,3s) ease-in-out infinite;
+  animation-delay:var(--dl,0s);
+}
+@keyframes twinkle{
+  0%,100%{opacity:.1;transform:scale(1)}
+  50%{opacity:.8;transform:scale(1.5)}
+}
+
+/* ===== CRESCENT DECO ===== */
+.crescent-deco{
+  position:fixed;top:-60px;right:-60px;
+  width:220px;height:220px;
+  opacity:.06;
+  pointer-events:none;
+  z-index:0;
+}
+
+/* ===== CONTAINER ===== */
+.mainbox{max-width:860px;margin:auto;padding:24px 16px 60px;}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:28px;
+  border:1px solid rgba(201,168,76,.3);
+}
+.hero-bg{
+  position:absolute;inset:0;
+  background:url('https://kotayogya.baznas.go.id/_next/image?url=https%3A%2F%2Fbucket-api.baznas.go.id%2Fbucket-api%2Ffile%3Fbucket%3Dbzn-fdr-smb-p5739641%26file%3Dattachments%2Fberita%2F1759973146783885267_805-QC1wHAMi%2Cjpg&w=1920&q=75') center/cover no-repeat;
+}
+.hero-overlay{
+  position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(10,22,40,.92) 0%,rgba(13,36,68,.88) 50%,rgba(10,22,40,.95) 100%);
+}
+.hero-content{
+  position:relative;z-index:2;
+  padding:48px 32px;
+  text-align:center;
+}
+.bismillah{
+  font-family:'Amiri',serif;
+  font-size:28px;
+  color:var(--gold-light);
+  letter-spacing:2px;
+  margin-bottom:16px;
+  animation:fadeDown .8s ease both;
+  text-shadow:0 0 30px rgba(201,168,76,.4);
+}
+.hero-title{
+  font-size:clamp(22px,4vw,32px);
+  font-weight:700;
+  color:#fff;
+  letter-spacing:1px;
+  animation:fadeDown .9s ease .1s both;
+}
+.hero-sub{
+  font-size:clamp(13px,2.5vw,16px);
+  color:rgba(240,208,128,.85);
+  margin-top:8px;
+  font-weight:300;
+  animation:fadeDown 1s ease .2s both;
+}
+.hero-divider{
+  width:80px;height:2px;
+  background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  margin:16px auto;
+  animation:fadeIn 1.2s ease .3s both;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,168,76,.15);
+  border:1px solid rgba(201,168,76,.35);
+  color:var(--gold-light);
+  font-size:12px;font-weight:500;
+  padding:6px 18px;border-radius:20px;
+  margin-top:12px;
+  animation:fadeUp 1s ease .4s both;
+}
+
+/* Animated arabesque top-bottom borders */
+.hero::after{
+  content:"";
+  position:absolute;bottom:0;left:0;right:0;
+  height:3px;
+  background:linear-gradient(90deg,transparent,var(--gold),var(--gold-light),var(--gold),transparent);
+  animation:shimmer 3s ease infinite;
+}
+@keyframes shimmer{
+  0%{background-position:-200% center}
+  100%{background-position:200% center}
+}
+
+/* ===== CARDS ===== */
+.glass-card{
+  background:rgba(13,36,68,.7);
+  border:1px solid rgba(59,130,246,.2);
+  border-radius:18px;
+  backdrop-filter:blur(12px);
+  box-shadow:0 8px 32px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.05);
+  animation:slideUp .6s ease both;
+}
+.card-header-custom{
+  padding:16px 24px;
+  border-radius:18px 18px 0 0;
+  border-bottom:1px solid rgba(59,130,246,.15);
+  display:flex;align-items:center;gap:10px;
+}
+.card-header-custom.green{background:linear-gradient(135deg,#064e3b,#065f46);}
+.card-header-custom.dark{background:linear-gradient(135deg,#1e3a5f,#0d2444);}
+.card-header-custom h6{
+  margin:0;color:#fff;font-weight:600;font-size:15px;letter-spacing:.5px;
+}
+.card-header-icon{
+  width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  background:rgba(255,255,255,.1);
+  font-size:16px;
+}
+.card-body-custom{padding:28px 24px;}
+
+/* ===== FORM ELEMENTS ===== */
+.form-label-custom{
+  display:block;
+  font-size:13px;font-weight:500;
+  color:rgba(219,234,254,.8);
+  margin-bottom:7px;
+  letter-spacing:.3px;
+}
+.form-label-custom i{color:var(--gold);margin-right:6px;}
+
+.form-control-custom,
+.form-select-custom{
+  width:100%;
+  background:rgba(10,22,40,.6);
+  border:1px solid rgba(59,130,246,.2);
+  border-radius:10px;
+  color:#e2e8f0;
+  padding:11px 14px;
+  font-family:'Poppins',sans-serif;
+  font-size:14px;
+  transition:border-color .25s,box-shadow .25s,background .25s;
+  outline:none;
+  -webkit-appearance:none;
+}
+.form-control-custom::placeholder{color:rgba(148,163,184,.5);}
+.form-control-custom:focus,
+.form-select-custom:focus{
+  border-color:rgba(59,130,246,.6);
+  background:rgba(13,36,68,.8);
+  box-shadow:0 0 0 3px rgba(37,99,235,.15);
+}
+.form-select-custom option{background:#0d2444;color:#e2e8f0;}
+
+.input-group-custom{
+  position:relative;
+  margin-bottom:20px;
+}
+
+/* ===== BUTTON ===== */
+.btn-start{
+  width:100%;
+  padding:14px 24px;
+  background:linear-gradient(135deg,#1d4ed8,#2563eb);
+  border:1px solid rgba(59,130,246,.4);
+  border-radius:12px;
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+  font-size:15px;font-weight:600;
+  letter-spacing:.5px;
+  cursor:pointer;
+  transition:all .3s;
+  position:relative;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-start::before{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(135deg,rgba(255,255,255,.1),transparent);
+  transform:translateX(-100%);
+  transition:transform .4s;
+}
+.btn-start:hover::before{transform:translateX(100%);}
+.btn-start:hover{
+  background:linear-gradient(135deg,#2563eb,#3b82f6);
+  box-shadow:0 8px 25px rgba(37,99,235,.4);
+  transform:translateY(-1px);
+}
+.btn-start:active{transform:translateY(0);}
+
+.btn-submit{
+  width:100%;
+  padding:14px 24px;
+  background:linear-gradient(135deg,#065f46,#047857);
+  border:1px solid rgba(16,185,129,.3);
+  border-radius:12px;
+  color:#fff;
+  font-family:'Poppins',sans-serif;
+  font-size:15px;font-weight:600;
+  letter-spacing:.5px;
+  cursor:pointer;
+  transition:all .3s;
+  display:flex;align-items:center;justify-content:center;gap:10px;
+}
+.btn-submit:hover{
+  background:linear-gradient(135deg,#047857,#059669);
+  box-shadow:0 8px 25px rgba(5,150,105,.35);
+  transform:translateY(-1px);
+}
+
+/* ===== TIMER ===== */
+#timerBox{
+  position:sticky;top:0;z-index:999;
+  background:linear-gradient(90deg,#7f1d1d,#991b1b,#7f1d1d);
+  border-bottom:2px solid rgba(239,68,68,.4);
+  color:#fff;
+  padding:12px 20px;
+  text-align:center;
+  font-weight:600;font-size:17px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  box-shadow:0 4px 20px rgba(239,68,68,.3);
+}
+#timerBox .timer-icon{
+  width:28px;height:28px;
+  background:rgba(255,255,255,.15);
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+  animation:pulse 1.5s ease infinite;
+}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.1)}}
+#timer{
+  font-size:20px;font-weight:700;
+  font-variant-numeric:tabular-nums;
+  letter-spacing:2px;
+}
+
+/* ===== SOAL BOX ===== */
+.soal-box{
+  background:rgba(10,22,40,.5);
+  border:1px solid rgba(59,130,246,.15);
+  border-radius:14px;
+  padding:22px;
+  margin-bottom:16px;
+  transition:border-color .2s,background .2s;
+  animation:fadeIn .4s ease both;
+}
+.soal-box:hover{
+  border-color:rgba(59,130,246,.35);
+  background:rgba(13,36,68,.6);
+}
+.soal-number{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:28px;height:28px;border-radius:50%;
+  background:linear-gradient(135deg,var(--blue-accent),var(--blue-glow));
+  color:#fff;font-size:13px;font-weight:700;
+  margin-right:10px;flex-shrink:0;
+}
+.soal-text{
+  color:#e2e8f0;font-size:15px;font-weight:500;
+  display:flex;align-items:flex-start;gap:4px;
+  margin-bottom:16px;
+}
+.option-label{
+  display:flex;align-items:flex-start;gap:10px;
+  padding:10px 14px;
+  border-radius:8px;
+  border:1px solid rgba(59,130,246,.1);
+  margin-bottom:8px;
+  cursor:pointer;
+  color:#cbd5e1;font-size:14px;
+  transition:all .2s;
+  position:relative;
+}
+.option-label:hover{
+  background:rgba(37,99,235,.12);
+  border-color:rgba(59,130,246,.35);
+  color:#e2e8f0;
+}
+.option-label input[type=radio]{
+  accent-color:var(--blue-glow);
+  width:16px;height:16px;flex-shrink:0;margin-top:1px;
+}
+.option-label:has(input:checked){
+  background:rgba(37,99,235,.2);
+  border-color:rgba(59,130,246,.6);
+  color:#fff;
+}
+
+/* ===== HASIL ===== */
+#hasilBox{
+  text-align:center;
+  padding:48px 32px;
+}
+.nilai-circle{
+  width:140px;height:140px;
+  border-radius:50%;
+  background:linear-gradient(135deg,#1d4ed8,#3b82f6);
+  border:4px solid rgba(201,168,76,.5);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  margin:0 auto 24px;
+  animation:scaleIn .6s cubic-bezier(.175,.885,.32,1.275) both;
+  box-shadow:0 0 40px rgba(37,99,235,.4);
+}
+.nilai-circle .nilai-num{
+  font-size:42px;font-weight:700;color:#fff;line-height:1;
+}
+.nilai-circle .nilai-label{
+  font-size:11px;color:rgba(219,234,254,.7);letter-spacing:1px;margin-top:4px;
+}
+@keyframes scaleIn{
+  from{transform:scale(0);opacity:0}
+  to{transform:scale(1);opacity:1}
+}
+.hasil-title{color:#e2e8f0;font-size:20px;font-weight:600;margin-bottom:8px;}
+.hasil-sub{color:rgba(148,163,184,.8);font-size:14px;}
+.timeout-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(239,68,68,.15);
+  border:1px solid rgba(239,68,68,.3);
+  color:#fca5a5;
+  padding:6px 16px;border-radius:20px;font-size:13px;
+  margin-bottom:16px;
+  animation:fadeIn .5s ease;
+}
+.ayat-box{
+  margin-top:24px;
+  padding:20px 24px;
+  background:rgba(201,168,76,.08);
+  border:1px solid rgba(201,168,76,.2);
+  border-radius:12px;
+}
+.ayat-arabic{
+  font-family:'Amiri',serif;
+  font-size:22px;color:var(--gold-light);
+  text-align:right;direction:rtl;line-height:1.8;
+  margin-bottom:8px;
+}
+.ayat-trans{
+  font-size:12px;color:rgba(203,213,225,.6);
+  font-style:italic;text-align:center;
+}
+
+/* ===== MODAL ===== */
+.modal-content-custom{
+  background:linear-gradient(145deg,#0d2444,#0a1628);
+  border:1px solid rgba(59,130,246,.25);
+  border-radius:18px;
+  overflow:hidden;
+}
+.modal-header-custom{
+  background:linear-gradient(135deg,#1e3a5f,#0d2444);
+  border-bottom:1px solid rgba(59,130,246,.15);
+  padding:18px 24px;
+}
+.modal-header-custom h5{color:#fff;font-weight:600;margin:0;font-size:16px;}
+.modal-body-custom{padding:24px;}
+.modal-footer-custom{
+  padding:16px 24px;
+  border-top:1px solid rgba(59,130,246,.1);
+  background:rgba(10,22,40,.4);
+}
+
+/* ===== LOADING ===== */
+#loadingOverlay{
+  position:fixed;inset:0;
+  background:rgba(10,22,40,.92);
+  display:none;
+  justify-content:center;align-items:center;
+  z-index:9999;
+  flex-direction:column;gap:16px;
+}
+.loading-spinner{
+  width:56px;height:56px;
+  border:3px solid rgba(37,99,235,.2);
+  border-top-color:var(--blue-glow);
+  border-radius:50%;
+  animation:spin .8s linear infinite;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-text{color:#e2e8f0;font-size:15px;font-weight:500;}
+.loading-sub{color:rgba(148,163,184,.6);font-size:12px;}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeDown{
+  from{opacity:0;transform:translateY(-20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeUp{
+  from{opacity:0;transform:translateY(20px)}
+  to{opacity:1;transform:translateY(0)}
+}
+@keyframes fadeIn{
+  from{opacity:0}to{opacity:1}
+}
+@keyframes slideUp{
+  from{opacity:0;transform:translateY(30px)}
+  to{opacity:1;transform:translateY(0)}
+}
+
+.hidden{display:none!important}
+
+/* ===== PROGRESS BAR ===== */
+.progress-wrap{
+  background:rgba(10,22,40,.5);
+  border-radius:8px;
+  height:6px;
+  margin-bottom:20px;
+  overflow:hidden;
+  border:1px solid rgba(59,130,246,.1);
+}
+.progress-bar-custom{
+  height:100%;
+  background:linear-gradient(90deg,var(--blue-accent),var(--blue-glow));
+  border-radius:8px;
+  transition:width .5s ease;
+}
+
+/* Ornamental divider */
+.ornament{
+  display:flex;align-items:center;gap:12px;
+  margin:20px 0;
+}
+.ornament-line{flex:1;height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,.3),transparent);}
+.ornament-diamond{
+  width:8px;height:8px;
+  background:var(--gold);
+  transform:rotate(45deg);
+  flex-shrink:0;
+}
+
+/* Section counter */
+.section-meta{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:18px;
+  padding-bottom:14px;
+  border-bottom:1px solid rgba(59,130,246,.1);
+}
+.section-meta span{color:rgba(148,163,184,.7);font-size:13px;}
+.section-meta b{color:var(--gold-light);}
+
+/* Scrollbar */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--blue-deep)}
+::-webkit-scrollbar-thumb{background:rgba(37,99,235,.4);border-radius:3px}
+::-webkit-scrollbar-thumb:hover{background:rgba(59,130,246,.6)}
+</style>
+</head>
+<body>
+
+<!-- Stars -->
+<div class="stars" id="starsEl"></div>
+
+<!-- Geo pattern bg -->
+<div class="geo-bg">
+  <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <pattern id="geo" x="0" y="0" width="80" height="80" patternUnits="userSpaceOnUse">
+        <path d="M40 0 L80 20 L80 60 L40 80 L0 60 L0 20 Z" fill="none" stroke="#c9a84c" stroke-width=".8"/>
+        <path d="M40 10 L70 25 L70 55 L40 70 L10 55 L10 25 Z" fill="none" stroke="#c9a84c" stroke-width=".4"/>
+        <circle cx="40" cy="40" r="4" fill="none" stroke="#c9a84c" stroke-width=".6"/>
+        <path d="M40 0 L40 10 M80 20 L70 25 M80 60 L70 55 M40 80 L40 70 M0 60 L10 55 M0 20 L10 25" stroke="#c9a84c" stroke-width=".4"/>
+      </pattern>
+    </defs>
+    <rect width="100%" height="100%" fill="url(#geo)"/>
+  </svg>
+</div>
+
+<!-- Crescent -->
+<svg class="crescent-deco" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <path d="M100 10 A90 90 0 1 1 10 100 A70 70 0 1 0 100 10 Z" fill="#c9a84c"/>
+  <circle cx="140" cy="40" r="8" fill="#c9a84c"/>
+  <circle cx="155" cy="65" r="5" fill="#c9a84c"/>
+  <circle cx="160" cy="92" r="3" fill="#c9a84c"/>
+</svg>
+
+<!-- Loading -->
+<div id="loadingOverlay">
+  <div class="loading-spinner"></div>
+  <div class="loading-text">Memuat Soal...</div>
+  <div class="loading-sub">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+</div>
+
+<div class="container mainbox">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="bismillah">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم</div>
+      <div class="hero-divider"></div>
+      <h3 class="hero-title">✈ PAJERO 2026</h3>
+      <p class="hero-sub">SOAL SEPUTAR SYARIAT ISLAM</p>
+      <span class="hero-badge">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 1l1.5 4.5H14l-3.7 2.7 1.4 4.3L8 9.8l-3.7 2.7 1.4-4.3L2 5.5h4.5z" fill="#f0d080"/></svg>
+        Post Test Syariah Islam
+      </span>
+    </div>
+  </div>
+
+  <!-- FORM PESERTA -->
+  <div id="formPeserta" class="glass-card mb-4">
+    <div class="card-header-custom green">
+      <div class="card-header-icon"><i class="bi bi-person-badge-fill" style="color:#6ee7b7;font-size:16px"></i></div>
+      <h6>Data Peserta</h6>
+    </div>
+    <div class="card-body-custom">
+
+      <div class="input-group-custom">
+        <label class="form-label-custom"><i class="bi bi-person-fill"></i>Nama Pegawai</label>
+        <input id="nama" class="form-control-custom" placeholder="Masukkan nama lengkap">
+      </div>
+
+      <div class="input-group-custom">
+        <label class="form-label-custom"><i class="bi bi-credit-card-2-front-fill"></i>NPP</label>
+        <input id="npp" class="form-control-custom" placeholder="Nomor Pokok Pegawai">
+      </div>
+
+      <div class="input-group-custom">
+        <label class="form-label-custom"><i class="bi bi-geo-alt-fill"></i>Region</label>
+        <select id="region" class="form-select-custom">
+          <option value="">— Pilih Region —</option>
+          <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+          <option>6</option><option>7</option><option>8</option><option>9</option><option>10</option>
+        </select>
+      </div>
+
+      <div class="input-group-custom">
+        <label class="form-label-custom"><i class="bi bi-building-fill"></i>Unit</label>
+        <input id="unit" class="form-control-custom" placeholder="Contoh: TWU Bekasi">
+      </div>
+
+      <div class="input-group-custom" style="margin-bottom:28px">
+        <label class="form-label-custom"><i class="bi bi-briefcase-fill"></i>Jabatan</label>
+        <select id="jabatan" class="form-select-custom">
+          <option value="">— Pilih Jabatan —</option>
+          <option>GM</option><option>Ceo Region</option><option>Deputy</option>
+          <option>Senior Manager</option><option>Manager</option>
+          <option>Asisten Manager</option><option>Staf</option>
+        </select>
+      </div>
+
+      <div class="ornament">
+        <div class="ornament-line"></div>
+        <div class="ornament-diamond"></div>
+        <div class="ornament-line"></div>
+      </div>
+
+      <button class="btn-start" onclick="mulaiPostTest()">
+        <i class="bi bi-play-circle-fill" style="font-size:18px"></i>
+        Mulai Post Test
+        <i class="bi bi-arrow-right-circle" style="font-size:16px;opacity:.7"></i>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- TIMER -->
+  <div id="timerBox" class="hidden">
+    <div class="timer-icon"><i class="bi bi-clock-fill" style="font-size:13px"></i></div>
+    <span style="font-size:14px;font-weight:400;opacity:.85">Sisa Waktu:</span>
+    <span id="timer" style="font-family:monospace">30:00</span>
+  </div>
+
+  <!-- KUIS -->
+  <div id="kuisBox" class="hidden mt-3">
+    <div class="glass-card">
+      <div class="card-header-custom dark">
+        <div class="card-header-icon"><i class="bi bi-book-fill" style="color:#93c5fd;font-size:16px"></i></div>
+        <h6>Post Test — Syariat Islam</h6>
+      </div>
+      <div class="card-body-custom">
+        <div class="section-meta">
+          <span>Jawab semua pertanyaan dengan teliti</span>
+          <span id="progressText"><b>0</b> / <b>0</b> dijawab</span>
+        </div>
+        <div class="progress-wrap"><div class="progress-bar-custom" id="progressBar" style="width:0%"></div></div>
+        <div id="listSoal"></div>
+        <div class="ornament" style="margin:28px 0 20px">
+          <div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div>
+        </div>
+        <button class="btn-submit" onclick="kumpulkan()">
+          <i class="bi bi-send-fill" style="font-size:16px"></i>
+          Kumpulkan Jawaban
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- HASIL -->
+  <div id="hasilBox" class="hidden mt-3 glass-card">
+    <div class="card-body-custom" style="text-align:center;padding:48px 32px">
+      <div id="tampilNilai"></div>
+      <div class="ayat-box">
+        <div class="ayat-arabic">وَقُلْ رَبِّ زِدْنِي عِلْمًا</div>
+        <div class="ayat-trans">"Dan katakanlah: Wahai Tuhanku, tambahkanlah ilmu kepadaku." (Q.S. Ṭāhā: 114)</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- LOGIN MODAL -->
+<div class="modal fade" id="loginModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content modal-content-custom">
+      <div class="modal-header-custom">
+        <div style="display:flex;align-items:center;gap:10px">
+          <div class="card-header-icon" style="background:rgba(37,99,235,.2)">
+            <i class="bi bi-shield-lock-fill" style="color:#93c5fd;font-size:15px"></i>
+          </div>
+          <h5>Verifikasi Akses</h5>
+        </div>
+      </div>
+      <div class="modal-body-custom">
+        <div class="ornament" style="margin:0 0 20px"><div class="ornament-line"></div><div class="ornament-diamond"></div><div class="ornament-line"></div></div>
+        <div class="input-group-custom">
+          <label class="form-label-custom"><i class="bi bi-person-fill"></i>Username</label>
+          <input id="userLogin" class="form-control-custom" placeholder="Masukkan username">
+        </div>
+        <div class="input-group-custom" style="margin-bottom:0">
+          <label class="form-label-custom"><i class="bi bi-key-fill"></i>Password</label>
+          <input id="passLogin" type="password" class="form-control-custom" placeholder="Masukkan password">
+        </div>
+        <div id="loginError" class="hidden" style="color:#fca5a5;font-size:13px;margin-top:10px;padding:8px 12px;background:rgba(239,68,68,.1);border-radius:8px;border:1px solid rgba(239,68,68,.2)">
+          <i class="bi bi-exclamation-triangle-fill me-1"></i>Username atau password salah
+        </div>
+      </div>
+      <div class="modal-footer-custom">
+        <button class="btn-start" onclick="cekLogin()" style="justify-content:center">
+          <i class="bi bi-box-arrow-in-right" style="font-size:17px"></i>
+          Masuk & Mulai
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+
+const WEBAPP = "https://script.google.com/macros/s/AKfycbwUFauAqTtlCe0JBSs_LMsaHE3Lojry3IUUKANqeEPEuGf8t2wruIwE5iK8NCWb3jrY/exec";
+
+const formPeserta = document.getElementById("formPeserta");
+const kuisBox = document.getElementById("kuisBox");
+const hasilBox = document.getElementById("hasilBox");
+const tampilNilai = document.getElementById("tampilNilai");
+const listSoal = document.getElementById("listSoal");
+const loadingOverlay = document.getElementById("loadingOverlay");
+
+let DATA_SOAL = [];
+let USER = {};
+let waktu = 1800;
+let interval;
+
+/* ---- Stars ---- */
+(function(){
+  const el = document.getElementById('starsEl');
+  for(let i=0;i<80;i++){
+    const s=document.createElement('div');
+    s.className='star';
+    s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;--d:${2+Math.random()*4}s;--dl:${Math.random()*4}s;opacity:${.1+Math.random()*.4}`;
+    if(Math.random()>.8){s.style.width=s.style.height='3px';}
+    el.appendChild(s);
+  }
+})();
+
+/* ---- Progress ---- */
+function updateProgress(){
+  if(!DATA_SOAL.length) return;
+  let ans = 0;
+  DATA_SOAL.forEach((_,i)=>{
+    if(document.querySelector(`input[name=soal${i}]:checked`)) ans++;
+  });
+  const pct = Math.round((ans/DATA_SOAL.length)*100);
+  document.getElementById('progressBar').style.width = pct+'%';
+  document.getElementById('progressText').innerHTML = `<b>${ans}</b> / <b>${DATA_SOAL.length}</b> dijawab`;
+}
+
+function mulaiPostTest(){
+  USER.nama = nama.value;
+  USER.npp = npp.value;
+  USER.region = region.value;
+  USER.unit = unit.value;
+  USER.jabatan = jabatan.value;
+  if(!USER.nama || !USER.npp){
+    alert("Nama & NPP wajib diisi");
+    return;
+  }
+  new bootstrap.Modal(document.getElementById('loginModal')).show();
+}
+
+function cekLogin(){
+  if(userLogin.value==="pajero3" && passLogin.value==="sunah"){
+    bootstrap.Modal.getInstance(document.getElementById('loginModal')).hide();
+    mulaiSoal();
+  }else{
+    loginError.classList.remove("hidden");
+  }
+}
+
+async function mulaiSoal(){
+  fetch(WEBAPP+"?action=simpandata",{method:"POST",body:JSON.stringify(USER)});
+  formPeserta.classList.add("hidden");
+  loadingOverlay.style.display="flex";
+
+  const res = await fetch(WEBAPP+"?action=getsoal");
+  DATA_SOAL = await res.json();
+
+  let html="";
+  DATA_SOAL.forEach((s,i)=>{
+    html+=`
+    <div class="soal-box" style="animation-delay:${i*.05}s">
+      <div class="soal-text">
+        <span class="soal-number">${i+1}</span>
+        <span>${s.soal}</span>
+      </div>
+      ${["A","B","C","D"].map(p=>`
+        <label class="option-label" onclick="setTimeout(updateProgress,50)">
+          <input type="radio" name="soal${i}" value="${p}">
+          <span style="min-width:22px;font-weight:600;color:var(--gold-light)">${p}.</span>
+          <span>${s["opsi"+p]}</span>
+        </label>
+      `).join("")}
+    </div>`;
+  });
+
+  listSoal.innerHTML = html;
+  loadingOverlay.style.display="none";
+  kuisBox.classList.remove("hidden");
+  updateProgress();
+  startTimer();
+}
+
+function startTimer(){
+  document.getElementById("timerBox").classList.remove("hidden");
+  interval = setInterval(()=>{
+    waktu--;
+    let m = Math.floor(waktu/60);
+    let d = waktu%60;
+    timer.innerText = String(m).padStart(2,'0')+":"+String(d).padStart(2,'0');
+    if(waktu<=300){
+      document.getElementById('timerBox').style.background='linear-gradient(90deg,#7c2d12,#c2410c,#7c2d12)';
+    }
+    if(waktu<=0){clearInterval(interval);waktuHabis();}
+  },1000);
+}
+
+function waktuHabis(){hitungNilai(true);}
+function kumpulkan(){clearInterval(interval);hitungNilai(false);}
+
+function hitungNilai(isTimeout){
+  let benar=0;
+  DATA_SOAL.forEach((s,i)=>{
+    const j=document.querySelector(`input[name=soal${i}]:checked`);
+    if(j && j.value===s.kunci) benar++;
+  });
+  USER.nilai = Math.round((benar/DATA_SOAL.length)*100);
+  fetch(WEBAPP+"?action=simpannilai",{method:"POST",body:JSON.stringify(USER)});
+  kuisBox.classList.add("hidden");
+  document.getElementById("timerBox").classList.add("hidden");
+  hasilBox.classList.remove("hidden");
+
+  const grade = USER.nilai>=80?'Sangat Baik':USER.nilai>=70?'Baik':USER.nilai>=60?'Cukup':'Perlu Belajar Lagi';
+  const gradeColor = USER.nilai>=80?'#4ade80':USER.nilai>=70?'#60a5fa':USER.nilai>=60?'#fbbf24':'#f87171';
+
+  tampilNilai.innerHTML = `
+    ${isTimeout?`<div class="timeout-badge"><i class="bi bi-clock-history"></i> Waktu Telah Habis</div><br>`:""}
+    <div class="nilai-circle">
+      <div class="nilai-num">${USER.nilai}</div>
+      <div class="nilai-label">NILAI</div>
+    </div>
+    <h4 class="hasil-title" style="color:${gradeColor}">${grade}</h4>
+    <p class="hasil-sub">Selamat, <b style="color:#e2e8f0">${USER.nama}</b>!<br>Terimakasih atas partisipasinya</p>
+  `;
+}
+
+/* ---- Deteksi pindah tab ---- */
+let curangCount = 0;
+document.addEventListener("visibilitychange", function(){
+  if(document.hidden && !kuisBox.classList.contains("hidden")){
+    curangCount++;
+    fetch(WEBAPP+"?action=curang",{method:"POST",body:JSON.stringify(USER)});
+    alert("⚠️ Dilarang pindah tab! Aktivitas Anda tercatat.");
+  }
+});
+</script>
+</body>
+</html>
