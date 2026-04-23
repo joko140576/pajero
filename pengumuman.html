@@ -3,52 +3,391 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <title>Informasi Test Pajero</title>
-
 <!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
-body {
-    height: 100vh;
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(135deg, #0f5132, #198754, #20c997);
+    background: #0a1a0f;
     font-family: 'Poppins', sans-serif;
     color: white;
-}
+    overflow: hidden;
+    position: relative;
+  }
 
-/* ALERT BOX */
-.alert-box {
+  /* Animated background particles */
+  .bg-canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(ellipse at 20% 50%, #0f5132 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, #198754 0%, transparent 50%),
+                radial-gradient(ellipse at 60% 80%, #052e16 0%, transparent 50%),
+                linear-gradient(135deg, #0a1a0f 0%, #0f2d1a 50%, #071510 100%);
+  }
+
+  /* Floating orbs */
+  .orb {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.25;
+    animation: floatOrb linear infinite;
+    z-index: 0;
+  }
+  .orb-1 { width: 400px; height: 400px; background: #198754; top: -100px; left: -100px; animation-duration: 18s; }
+  .orb-2 { width: 300px; height: 300px; background: #20c997; bottom: -80px; right: -80px; animation-duration: 22s; animation-delay: -8s; }
+  .orb-3 { width: 200px; height: 200px; background: #0f5132; top: 40%; left: 60%; animation-duration: 15s; animation-delay: -4s; }
+
+  @keyframes floatOrb {
+    0%   { transform: translate(0, 0) scale(1); }
+    33%  { transform: translate(30px, -40px) scale(1.08); }
+    66%  { transform: translate(-20px, 20px) scale(0.95); }
+    100% { transform: translate(0, 0) scale(1); }
+  }
+
+  /* Grid lines background */
+  .grid-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background-image:
+      linear-gradient(rgba(32,201,151,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(32,201,151,0.04) 1px, transparent 1px);
+    background-size: 60px 60px;
+    animation: gridShift 30s linear infinite;
+  }
+  @keyframes gridShift {
+    from { background-position: 0 0; }
+    to   { background-position: 60px 60px; }
+  }
+
+  /* Scanline effect */
+  .scanline {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(0,0,0,0.03) 3px,
+      rgba(0,0,0,0.03) 4px
+    );
+    pointer-events: none;
+  }
+
+  /* Main card */
+  .alert-box {
+    position: relative;
+    z-index: 10;
     max-width: 700px;
+    width: 90%;
     text-align: center;
-    padding: 40px;
-}
+    padding: 0;
+    animation: cardEntrance 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
 
-/* TEKS BESAR */
-.big-text {
-    font-size: 2rem;
+  @keyframes cardEntrance {
+    from { opacity: 0; transform: translateY(60px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  .card-inner {
+    background: rgba(15, 40, 25, 0.75);
+    border: 1px solid rgba(32, 201, 151, 0.2);
+    border-radius: 24px;
+    padding: 52px 48px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    box-shadow:
+      0 0 0 1px rgba(32,201,151,0.08),
+      0 32px 80px rgba(0,0,0,0.6),
+      inset 0 1px 0 rgba(255,255,255,0.06);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Corner accents */
+  .card-inner::before, .card-inner::after {
+    content: '';
+    position: absolute;
+    width: 60px; height: 60px;
+    border-color: rgba(32,201,151,0.45);
+    border-style: solid;
+  }
+  .card-inner::before {
+    top: 16px; left: 16px;
+    border-width: 2px 0 0 2px;
+    border-radius: 6px 0 0 0;
+  }
+  .card-inner::after {
+    bottom: 16px; right: 16px;
+    border-width: 0 2px 2px 0;
+    border-radius: 0 0 6px 0;
+  }
+
+  /* Top glare */
+  .card-glare {
+    position: absolute;
+    top: 0; left: 10%; right: 10%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(32,201,151,0.6), transparent);
+    animation: glareMove 4s ease-in-out infinite;
+  }
+  @keyframes glareMove {
+    0%, 100% { opacity: 0.4; left: 10%; right: 60%; }
+    50%       { opacity: 1;   left: 40%; right: 10%; }
+  }
+
+  /* Warning badge */
+  .badge-warn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(255, 193, 7, 0.12);
+    border: 1px solid rgba(255, 193, 7, 0.3);
+    color: #ffc107;
+    font-size: 0.7rem;
     font-weight: 700;
-    line-height: 1.5;
-}
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    padding: 6px 18px;
+    border-radius: 999px;
+    margin-bottom: 28px;
+    animation: fadePulse 2.5s ease-in-out infinite, cardEntrance 1.1s 0.15s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes fadePulse {
+    0%, 100% { opacity: 0.8; box-shadow: 0 0 0 0 rgba(255,193,7,0); }
+    50%       { opacity: 1;   box-shadow: 0 0 12px 3px rgba(255,193,7,0.15); }
+  }
+
+  /* Icon */
+  .warn-icon {
+    font-size: 1.2rem;
+    animation: iconShake 3s ease-in-out infinite;
+  }
+  @keyframes iconShake {
+    0%,100% { transform: rotate(0deg); }
+    10%      { transform: rotate(-8deg); }
+    20%      { transform: rotate(8deg); }
+    30%      { transform: rotate(0deg); }
+  }
+
+  /* Title */
+  .main-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.6rem;
+    letter-spacing: 0.08em;
+    color: #ffffff;
+    line-height: 1;
+    margin-bottom: 28px;
+    text-shadow: 0 0 40px rgba(32,201,151,0.3);
+    animation: cardEntrance 1s 0.25s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  /* Divider */
+  .divider {
+    width: 80px; height: 2px;
+    background: linear-gradient(90deg, transparent, #20c997, transparent);
+    margin: 0 auto 28px;
+    animation: dividerExpand 1s 0.4s ease both, cardEntrance 1s 0.3s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  @keyframes dividerExpand {
+    from { width: 0; opacity: 0; }
+    to   { width: 80px; opacity: 1; }
+  }
+
+  /* Body text */
+  .big-text {
+    font-size: 1.35rem;
+    font-weight: 600;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.88);
+    animation: cardEntrance 1s 0.4s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  /* Danger text */
+  .text-danger {
+    color: #ff6b6b !important;
+    display: inline-block;
+    animation: dangerGlow 2s ease-in-out infinite;
+    position: relative;
+  }
+  @keyframes dangerGlow {
+    0%,100% { text-shadow: 0 0 8px rgba(255,107,107,0.3); }
+    50%      { text-shadow: 0 0 24px rgba(255,107,107,0.7), 0 0 40px rgba(255,107,107,0.3); }
+  }
+
+  /* Countdown dots decoration */
+  .dots-row {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 36px;
+    animation: cardEntrance 1s 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: #20c997;
+    animation: dotBlink 1.4s ease-in-out infinite;
+  }
+  .dot:nth-child(2) { animation-delay: 0.2s; background: #198754; }
+  .dot:nth-child(3) { animation-delay: 0.4s; background: #0f5132; }
+  @keyframes dotBlink {
+    0%,80%,100% { opacity: 0.2; transform: scale(1); }
+    40%          { opacity: 1;   transform: scale(1.5); }
+  }
+
+  /* Ticker bar */
+  .ticker-wrap {
+    position: fixed;
+    bottom: 0; left: 0; right: 0;
+    z-index: 20;
+    background: rgba(10,26,15,0.9);
+    border-top: 1px solid rgba(32,201,151,0.2);
+    backdrop-filter: blur(8px);
+    padding: 10px 0;
+    overflow: hidden;
+  }
+  .ticker-track {
+    display: flex;
+    gap: 80px;
+    animation: tickerScroll 20s linear infinite;
+    white-space: nowrap;
+  }
+  .ticker-item {
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(32,201,151,0.7);
+    flex-shrink: 0;
+  }
+  .ticker-sep {
+    color: rgba(32,201,151,0.3);
+    margin: 0 16px;
+  }
+  @keyframes tickerScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+
+  /* Particle burst */
+  @keyframes particleFly {
+    0%   { transform: translate(0,0) scale(1); opacity: 0.8; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+  }
+  .particle {
+    position: fixed;
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: #20c997;
+    animation: particleFly 3s ease-out infinite;
+    z-index: 1;
+  }
+
+  @media (max-width: 600px) {
+    .card-inner { padding: 36px 28px; }
+    .main-title { font-size: 2.6rem; }
+    .big-text   { font-size: 1.1rem; }
+  }
 </style>
-
 </head>
-
 <body>
 
-<div class="alert alert-warning shadow-lg alert-box">
-    
-    <h2 class="mb-4 fw-bold">⚠️ PENGUMUMAN</h2>
+<div class="bg-canvas"></div>
+<div class="grid-bg"></div>
+<div class="scanline"></div>
 
-    <div class="big-text">
-       Soal dan waktu Test Pajero masih dalam Persiapan <br>
-        <span class="text-danger fw-bold">Akan diumumkan segera!</span>
+<div class="orb orb-1"></div>
+<div class="orb orb-2"></div>
+<div class="orb orb-3"></div>
+
+<!-- Floating particles -->
+<div id="particles"></div>
+
+<div class="alert-box">
+  <div class="card-inner">
+    <div class="card-glare"></div>
+
+    <div class="badge-warn">
+      <span class="warn-icon">⚠️</span>
+      PENGUMUMAN
     </div>
 
+    <h2 class="main-title">TEST PAJERO</h2>
+
+    <div class="divider"></div>
+
+    <div class="big-text">
+      Soal dan waktu Test Pajero masih dalam Persiapan<br>
+      <span class="text-danger fw-bold">Akan diumumkan segera!</span>
+    </div>
+
+    <div class="dots-row">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
 </div>
 
+<!-- Ticker -->
+<div class="ticker-wrap">
+  <div class="ticker-track" id="ticker"></div>
+</div>
+
+<script>
+  // Floating particles
+  const pContainer = document.getElementById('particles');
+  const colors = ['#20c997','#198754','#0f5132','#ffc107'];
+  for (let i = 0; i < 18; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    const tx = (Math.random() - 0.5) * 300;
+    const ty = (Math.random() - 0.5) * 300;
+    p.style.cssText = `
+      left: ${10 + Math.random() * 80}%;
+      top:  ${10 + Math.random() * 80}%;
+      background: ${colors[Math.floor(Math.random()*colors.length)]};
+      --tx: ${tx}px;
+      --ty: ${ty}px;
+      animation-delay: ${Math.random() * -3}s;
+      animation-duration: ${2.5 + Math.random() * 2}s;
+      opacity: ${0.3 + Math.random() * 0.5};
+      width: ${3 + Math.random() * 4}px;
+      height: ${3 + Math.random() * 4}px;
+    `;
+    pContainer.appendChild(p);
+  }
+
+  // Ticker
+  const msgs = [
+    'Informasi Test Pajero',
+    '★',
+    'Soal & Waktu Masih Disiapkan',
+    '★',
+    'Pantau Terus Pengumuman Resmi',
+    '★',
+    'Stay Tuned',
+    '★',
+  ];
+  const full = [...msgs, ...msgs].map(m =>
+    `<span class="ticker-item">${m === '★' ? '<span class="ticker-sep">★</span>' : m}</span>`
+  ).join('');
+  document.getElementById('ticker').innerHTML = full;
+</script>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
