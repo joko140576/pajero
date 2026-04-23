@@ -1457,7 +1457,22 @@ function goPeserta() {
 }
 
 function mulaiTest(kategori) {
-  window.location.href = 'pengumuman.html';
+  switch(kategori) {
+    case 'umroh':
+      window.location.href = 'soal1.html';
+      break;
+
+    case 'alquran':
+      window.location.href = 'soal2.html';
+      break;
+
+    case 'akhlak':
+      window.location.href = 'soal3.html';
+      break;
+
+    default:
+      alert('Kategori tidak ditemukan');
+  }
 }
 
 /* ─── COUNTER ANIMATION ─── */
