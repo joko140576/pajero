@@ -969,6 +969,47 @@ footer {
   .batch-section { padding: 70px 0; }
   .rules-section { padding: 70px 0; }
 }
+
+
+.card-custom {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .table thead {
+            background: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: white;
+        }
+
+        .table tbody tr {
+            transition: 0.3s;
+        }
+
+        .table tbody tr:hover {
+            background-color: rgba(255,255,255,0.1);
+            transform: scale(1.01);
+        }
+
+        .btn-zoom {
+            background: linear-gradient(45deg, #ff512f, #dd2476);
+            border: none;
+            color: white;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-zoom:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(255, 0, 100, 0.5);
+        }
+
+        h2 {
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
 </style>
 </head>
 <body>
@@ -1035,6 +1076,55 @@ footer {
       </div>
     </div>
   </div>
+</div>
+
+<div class="container mt-5">
+    <div class="card-custom">
+        <h2 class="text-center mb-4">📋 Jadwal Seleksi Pajero 2026</h2>
+
+        <div class="table-responsive">
+            <table class="table table-bordered text-white align-middle text-center">
+                <thead>
+                    <tr>
+                        <th>Seleksi Pajero</th>
+                        <th>Hari / Tanggal</th>
+                        <th>Link Zoom</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1. Seleksi Orang Pusat</td>
+                        <td>Senin / 04 Mei 2026</td>
+                        <td>
+                            <a href="https://zoom.us/j/97236025776?pwd=i0ak6DKRAFbUbfu2D5i4iJr4xufGYA.1" target="_blank" class="btn btn-zoom">
+                                Join Zoom
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>2. Seleksi Wilayah OPR 1</td>
+                        <td>Selasa / 05 Mei 2026</td>
+                        <td>
+                            <a href="https://zoom.us/j/92882508172?pwd=nCarAh6ZTD3Dac0Zl2Jbi17H7eINkh.1" target="_blank" class="btn btn-zoom">
+                                Join Zoom
+                            </a>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>3. Seleksi Wilayah OPR 2</td>
+                        <td>Rabu / 06 Mei 2026</td>
+                        <td>
+                            <a href="https://zoom.us/j/93175831780?pwd=qAmofU2uiNYxV6b0QRGDVCrTojDBF2.1" target="_blank" class="btn btn-zoom">
+                                Join Zoom
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 
 <!-- ═══ MAKSUD & TUJUAN ═══ -->
